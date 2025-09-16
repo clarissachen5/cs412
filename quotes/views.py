@@ -44,7 +44,7 @@ def quote_page(request):
 def show_all_page(request):
     """Respond to the URL 'show_all', delegate work to a template"""
 
-    template_name = "quotes/quote.html"
+    template_name = "quotes/show_all.html"
     context = {
         "quotes": quotes,
         "images": images,

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "hw",  # NEW
     "formdata",
+    "quotes",
 ]
 
 MIDDLEWARE = [

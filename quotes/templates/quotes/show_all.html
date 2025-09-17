@@ -1,13 +1,21 @@
 {% extends 'quotes/base.html' %}
 {% block content %}
+    
     <h1>Rarity's Quotes</h1>
     {% for q in quotes %}
-    <p>{{q}}</p>
+    
+    <p>"{{q}}"</p>
+    
+    
     {% endfor %}
 
     {% for i in images %}
+    
     <img src={{i}}>
+    
     {% endfor %}
+    
+
 
         
 {% endblock %}

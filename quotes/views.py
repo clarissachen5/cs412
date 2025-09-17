@@ -8,11 +8,15 @@ quotes = [
     "Take that, you ruffian!",
     "I simply cannot let such a crime against fabulosity go uncorrected",
     "Look upon me Equestria, for I am Rarity!",
+    "Thank you Twilight. But don't get any ideas about my gem! I know where you live.",
+    "It's mine!",
 ]
 images = [
     "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Rarity_in_S1E19.png/250px-Rarity_in_S1E19.png",
     "https://cdn.staticneo.com/w/mylittlepony/thumb/Rarityy.png/300px-Rarityy.png",
     "https://i.ytimg.com/vi/roXJuJfbdG4/maxresdefault.jpg",
+    "https://i.ytimg.com/vi/Ue0oZIl2vlA/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBNJzIJQYtekUX12OPZxTe3cU5lsw",
+    "https://i.ytimg.com/vi/tJiaBI3Ggkw/maxresdefault.jpg",
 ]
 
 

@@ -1,3 +1,7 @@
+/* File: restaurant/styles.css
+Author: Clarissa Chen (clchen5@bu.edu), 9/19/2025
+Description: Specifies styling for restaurant app  */
+
 body {
     background-color: #fff;
     color: black;
@@ -16,6 +20,7 @@ h1,h2,h3,h4,h5{
 }
 
 h2, h3, h4 {
+    /* overrides background color */
     background: none;
 }
 
@@ -51,7 +56,6 @@ nav {
     text-align: center;
     align-content: center;
     background: white;
-
 }
 
 img {
@@ -59,6 +63,4 @@ img {
     display: block;
     margin: auto;
     margin-top: 30px;
-   
-
 } 

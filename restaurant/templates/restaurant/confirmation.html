@@ -1,4 +1,9 @@
-{% extends 'restaurant/base.html' %}
+<!-- 
+File: restaurant/confirmation.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/19/2025
+Description: Confirmation page when form is submitted -->
+
+{% extends 'restaurant/base.html' %} <!-- uses base template -->
 
 {% block content %}
 <div class="info">
@@ -7,16 +12,15 @@
     <br>
     <h2>Your Order is Confirmed: </h2>
 
+    <!-- displays food and price for each dish ordered, adds $ to each price -->
     {% for food, price in pairs %}
-    
-    <h3>{{food}} ${{price}}</h3>
-    
+        <h3>{{food}} ${{price}}</h3>
     {% endfor %}
  
     <h2>Total: ${{total}}</h2>
     <br>
     <h3>Special Instructions: </h3>
-    <h4>{{instructions}}</h4>
+    <h4>{{special_instructions}}</h4>
     <br>
     <br>
     <h2>Your order will be ready at {{time}}</h2>

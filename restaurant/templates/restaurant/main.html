@@ -1,4 +1,11 @@
-{% extends 'restaurant/base.html' %}
+<!-- 
+File: restaurant/main.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/19/2025
+Description: Main page that displays the restaurant name, 
+location, hours, and image -->
+
+{% extends 'restaurant/base.html' %} <!-- uses base template -->
+
 {% block content %}
     <h2 class="info">{{name}}</h2>
     <br>
@@ -7,8 +14,8 @@
     <h3 class="info">Hours:</h3>
     <div class="center">
         <table>
+            <!--displays each day and associated hours as own row in table-->
             {% for d,t in hours %}
-            
             <tr>
                 <td>{{d}}</td>
                 <td>{{t}}</td>
@@ -17,6 +24,8 @@
         </table>
     </div>
 
+    <!--currently uses one image but made a loop
+     to easily add images for display if wanted in future-->
     {% for i in images %}
     <img src={{i}}>
     {% endfor %}

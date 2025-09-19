@@ -1,20 +1,21 @@
+# File: restaurant/view.py
+# Author: Clarissa Chen (clchen5@bu.edu), 9/19/2025
+# Description: Views specific to restaurant app
 from django.shortcuts import render
-
-# Create your views here.
 
 import random
 import time
 
 
 def main_page(request):
-    """Respond to the URL '', delegate work to a template."""
+    """Respond to the URL 'main', delegate work to main template."""
 
     template_name = "restaurant/main.html"
 
     context = {
         "name": "Clarissa's Cafe",
         "location": "33 Harry Agganis Way, \nBoston, MA 02215",
-        "hours": [
+        "hours": [  # array of arrays to easily display in table in hmtl
             ["Sunday", "8am-5pm"],
             ["Monday", "8am-2pm"],
             ["Tuesday", "8am-2pm"],
@@ -39,21 +40,25 @@ specials = [
     "Smoked Turkey",
     "Tallow Mashed Potatoes",
     "Fish and Chips",
-]
+]  # daily specials
 
 
 def order_page(request):
-    """Respond to the URL '', delegate work to a template."""
+    """Respond to the URL 'order', delegate work to order template."""
 
     template_name = "restaurant/order.html"
 
-    context = {"special": specials[random.randint(0, len(specials) - 1)]}
+    context = {
+        "special": specials[random.randint(0, len(specials) - 1)]
+        # picks a random special
+    }
 
     return render(request, template_name, context)
 
 
 def confirmation_page(request):
-    """Process the form submission, and generate a confirmation."""
+    """Process the order form submission, and generate a confirmation,
+    delegate work to confirmation template."""
 
     template_name = "restaurant/confirmation.html"
     print(request)
@@ -62,9 +67,11 @@ def confirmation_page(request):
 
         order = request.POST.getlist("order")
         # gets the list of order checkboxes that are checked
-        # note to self: research getlist
+
         orderSelected = []
         pricesSelected = []
+
+        # separates ordered dish names and prices and converts prices to ints
         for o in order:
             orderSelected.append(o.split("|")[0])
             if o.split("|")[0] in specials:
@@ -74,27 +81,29 @@ def confirmation_page(request):
 
         totalPrice = sum(pricesSelected)
 
+        # combines ordered dish names and int prices
         pairs = []
         for p in range(len(orderSelected)):
             pairs.append((orderSelected[p], pricesSelected[p]))
 
-        instructions = request.POST["special_instructions"]
+        special_instructions = request.POST["special_instructions"]
         name = request.POST["name"]
-        phoneNumber = request.POST["phone_number"]
+        phone_number = request.POST["phone_number"]
         email = request.POST["email"]
 
-        sendTime = time.time()
+        # create pick up time
+        current_time = time.time()
         seconds = 60 * random.randint(30, 60)
-        pickUpTime = time.ctime(sendTime + seconds)
+        pick_up_time = time.ctime(current_time + seconds)
 
         context = {
             "pairs": pairs,
             "total": totalPrice,
-            "instructions": instructions,
+            "special_instructions": special_instructions,
             "name": name,
-            "phone_number": phoneNumber,
+            "phone_number": phone_number,
             "email": email,
-            "time": pickUpTime,
+            "time": pick_up_time,
         }
 
     return render(request, template_name=template_name, context=context)

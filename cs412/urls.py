@@ -1,3 +1,7 @@
+# File: urls.py
+# Author: Clarissa Chen (clchen5@bu.edu), 9/16/2025
+# Description: Creates the URL configuration for cs412 project
+
 """
 URL configuration for cs412 project.
 
@@ -25,5 +29,7 @@ urlpatterns = [
     path("hw/", include("hw.urls")),
     path("formdata/", include("formdata.urls")),
     path("quotes/", include("quotes.urls")),
-    path("restaurant/", include("restaurant.urls")),
+    path(
+        "restaurant/", include("restaurant.urls")
+    ),  # adds restaurant url path to my cs412 project
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

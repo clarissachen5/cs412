@@ -1,3 +1,6 @@
+# File: settings.py
+# Author: Clarissa Chen (clchen5@bu.edu), 9/19/2025
+# Description: Specifies django settings for cs412 project
 """
 Django settings for cs412 project.
 
@@ -41,7 +44,7 @@ INSTALLED_APPS = [
     "hw",  # NEW
     "formdata",
     "quotes",
-    "restaurant",
+    "restaurant",  # installs new restaurant app
 ]
 
 MIDDLEWARE = [

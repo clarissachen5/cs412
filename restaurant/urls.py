@@ -4,6 +4,7 @@ from . import views
 
 # URL patterns specific to the hw app:
 urlpatterns = [
+    path(r"", views.main_page, name="main_page"),
     path(r"main", views.main_page, name="main_page"),
     path(r"order", views.order_page, name="order_page"),
     path(r"submit", views.submit, name="submit"),

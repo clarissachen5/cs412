@@ -52,7 +52,7 @@ def order_page(request):
     return render(request, template_name, context)
 
 
-def submit(request):
+def confirmation_page(request):
     """Process the form submission, and generate a confirmation."""
 
     template_name = "restaurant/confirmation.html"

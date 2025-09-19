@@ -4,7 +4,7 @@
 <div>
     <h1>Order Food</h1>
 
-    <form action="{% url 'submit' %}" method="POST">
+    <form action="{% url 'confirmation_page' %}" method="POST">
         {% csrf_token %}
 
         <div class="center">
@@ -33,7 +33,7 @@
         <textarea rows="3" cols="60" style="margin:auto; display:block;" name="special_instructions"></textarea>
         <h1>Customer Information</h1>
 
-        <div id="info">
+        <div class="info">
             Name: <input type="text" name="name">
             Phone: <input type="text" name="phone_number">
             Email: <input type="text" name="email">

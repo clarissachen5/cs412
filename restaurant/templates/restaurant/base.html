@@ -1,0 +1,19 @@
+{% load static %}
+<html>
+    <head>
+        <title>Clarissa's Cafe</title>
+        <link rel="stylesheet" href="{% static 'restaurant/styles.css' %}">
+    </head>
+    <body>
+        <h1>Clarissa's Cafe</h1>
+        <nav>
+            <a href="{% url 'main_page' %}">Main Page</a>
+            <a href="{% url 'order_page' %}">Order Page</a>
+        </nav>
+
+        <!-- put page specific content here -->
+         {% block content %}
+         {% endblock %}
+        
+    </body>
+</html>

@@ -1,0 +1,51 @@
+{% extends 'restaurant/base.html' %}
+{% block content %}
+
+<div>
+    <h1>Order Food</h1>
+
+    <form action="{% url 'submit' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="center">
+            <input type="checkbox" id="fried_chicken" name="order" value="Fried Chicken|16">
+            <label for="fried_chicken">Fried Chicken $16</label><br>
+            <h4 id="add_on">Add on:</h4>
+                <div id="indent">
+                    <input type="checkbox" id="fries" name="order" value="Fries|4">
+                    <label for="fries">Fries $4</label><br>
+                </div>
+            <input type="checkbox" id="pulled_pork" name="order" value="Pulled Pork|22">
+            <label for="pulled_pork">Pulled Pork $22</label><br>
+            <input type="checkbox" id="bbq_chicken" name="order" value="BBQ Chicken|21">
+            <label for="bbq_chicken">BBQ Chicken $21</label><br>
+            <input type="checkbox" id="pork_ribs" name="order" value="Pork Ribs|18">
+            <label for="pork_ribs">Pork Ribs $18</label><br>
+        </div>
+        <h1>Today's Daily Special</h1>
+        <div class="center">
+            <input type="checkbox" id={{special}} name="order" value="{{special}}|20">
+           <label for={{special}}>{{special}} $20</label><br>
+     
+        </div>
+        
+        <h1>Special Instructions</h1>
+        <textarea rows="3" cols="60" style="margin:auto; display:block;" name="special_instructions"></textarea>
+        <h1>Customer Information</h1>
+
+        <div id="info">
+            Name: <input type="text" name="name">
+            Phone: <input type="text" name="phone_number">
+            Email: <input type="text" name="email">
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="center">
+            <input type="submit">
+        </div>
+        
+    </form>
+</div>
+    
+{% endblock %}

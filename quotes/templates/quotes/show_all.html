@@ -1,21 +1,19 @@
-{% extends 'quotes/base.html' %}
-{% block content %}
-    
+<!-- 
+File: quotes/show_all.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/16/2025
+Description: Displays information for show_all page -->
+
+{% extends 'quotes/base.html' %} <!-- uses base template -->
+{% block content %} <!-- page specific content starts here -->
+
     <h1>Rarity's Quotes</h1>
-    {% for q in quotes %}
     
-    <p>"{{q}}"</p>
-    
-    
+    {% for q in quotes %} <!--displays all quotes in quotes-->
+        <p>"{{q}}"</p>
     {% endfor %}
 
-    {% for i in images %}
-    
-    <img src={{i}}>
-    
+    {% for i in images %} <!--displays all images in images-->
+        <img src={{i}}>
     {% endfor %}
-    
-
-
-        
-{% endblock %}
+       
+{% endblock %} <!-- page specific content ends here -->

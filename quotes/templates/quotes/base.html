@@ -1,22 +1,28 @@
-{% load static %}
+<!-- 
+File: quotes/base.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/16/2025
+Description: Creates base template for all pages in quotes app -->
+
+{% load static %} <!-- makes static files available for use of styles.css later -->
 <html>
     <head>
         <title>Rarity</title>
-        <link rel="stylesheet" href="{% static 'quotes/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'quotes/styles.css' %}"> <!--specifies the styling-->
     </head>
     <body>
         <h1>My Little Pony</h1>
         <nav>
-            
-            <li><a href="{% url 'quote_page' %}">Home</a></li>
-            <li><a href="{% url 'show_all_page' %}">Show All</a></li>
-            <li><a href="{% url 'about_page' %}">About</a></li>
+            <!-- creates navigation links to Home (quote), Show All, and About pages -->
+            <li><a href="{% url 'quote' %}">Home</a></li> 
+            <li><a href="{% url 'show_all' %}">Show All</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
             
         </nav>
 
         <!-- put page specific content here -->
          {% block content %}
          {% endblock %}
+        <!-- end page specific content -->
         
     </body>
 </html>

@@ -1,9 +1,12 @@
+# File: quotes/views.py
+# Author: Clarissa Chen (clchen5@bu.edu), 9/16/2025
+# Description: Configures views specific to quotes app
+
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 
 import random
 
-# Create your views here.
 quotes = [
     "Take that, you ruffian!",
     "I simply cannot let such a crime against fabulosity go uncorrected",
@@ -21,19 +24,11 @@ images = [
 
 
 def quote(request):
-    """Fund to respond to the "home" request."""
-    response_text = f"""
-    <html>
-    <h1>My Little Pony</h1>
-    </html>
-    """
+    """Respond to the URL '' and 'quote', delegate work to quote template.
+    Displays one quote and one image"""
 
-    return HttpResponse(response_text)
-
-
-def quote_page(request):
-    """Respond to the URL '', delegate work to a template. Displays one quote and one image"""
     index = random.randint(0, len(quotes) - 1)
+    # picks a random index for the quote and correspnding image
 
     template_name = "quotes/quote.html"
     context = {
@@ -44,23 +39,23 @@ def quote_page(request):
     return render(request, template_name, context)
 
 
-def show_all_page(request):
-    """Respond to the URL 'show_all', delegate work to a template"""
+def show_all(request):
+    """Respond to the URL 'show_all', delegate work to the show_all template"""
 
     template_name = "quotes/show_all.html"
     context = {
-        "quotes": quotes,
+        "quotes": quotes,  # passes in all quotes and images
         "images": images,
     }
 
     return render(request, template_name, context)
 
 
-def about_page(request):
-    """Respond to the URL 'about', delegate work to a template."""
+def about(request):
+    """Respond to the URL 'about', delegate work to the about template."""
 
     template_name = "quotes/about.html"
-    # a dict of context variables (key-value pairs)
+
     context = {
         "name": "Rarity",
     }

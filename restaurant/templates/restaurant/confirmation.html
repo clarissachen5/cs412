@@ -5,7 +5,7 @@ Description: Confirmation page when form is submitted -->
 
 {% extends 'restaurant/base.html' %} <!-- uses base template -->
 
-{% block content %}
+{% block content %} <!-- page specific content starts here -->
 <div class="info">
     <h1>Confirmation</h1>
     <h2>Thank you for your order!</h2>
@@ -23,7 +23,7 @@ Description: Confirmation page when form is submitted -->
     <h4>{{special_instructions}}</h4>
     <br>
     <br>
-    <h2>Your order will be ready at {{time}}</h2>
+    <h2>Your order will be ready at {{ready_time}}</h2>
 
     <h3>Pick up by {{name}}</h3>
     <h3>{{phone_number}}</h3>
@@ -31,4 +31,4 @@ Description: Confirmation page when form is submitted -->
 
     
 </div>
-{% endblock %}
+{% endblock %} <!-- page specific content ends here -->

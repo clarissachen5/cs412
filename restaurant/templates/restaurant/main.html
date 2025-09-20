@@ -6,7 +6,7 @@ location, hours, and image -->
 
 {% extends 'restaurant/base.html' %} <!-- uses base template -->
 
-{% block content %}
+{% block content %} <!-- page specific content starts here -->
     <h2 class="info">{{name}}</h2>
     <br>
     <h3 class="info">{{location}}</h3>
@@ -24,11 +24,12 @@ location, hours, and image -->
         </table>
     </div>
 
-    <!--currently uses one image but made a loop
-     to easily add images for display if wanted in future-->
+    <!-- page currently is only sent one image in the context variable 
+     but made a loop to easily add images for display if wanted in future
+      by sending more in the context variable "images" in the main view-->
     {% for i in images %}
     <img src={{i}}>
     {% endfor %}
     
     
-{% endblock %}
+{% endblock %} <!-- page specific content ends here -->

@@ -1,4 +1,4 @@
-# File: urls.py
+# File: cs412/urls.py
 # Author: Clarissa Chen (clchen5@bu.edu), 9/16/2025
 # Description: Creates the URL configuration for cs412 project
 

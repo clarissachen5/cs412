@@ -5,16 +5,16 @@ Description: Order form page that allows customer to order
 food and sends to confirmation page when submitted -->
 {% extends 'restaurant/base.html' %} <!-- uses base template -->
 
-{% block content %}
+{% block content %} <!-- page specific content starts here -->
 
 <div>
     <h1>Order Food</h1>
 
-    <form action="{% url 'confirmation_page' %}" method="POST">
-        {% csrf_token %}
+    <form action="{% url 'confirmation' %}" method="POST">
+        {% csrf_token %} <!-- allows form info to be posted -->
 
         <div class="center">
-            <!-- displays menu items and prices as checkboxes -->
+            <!-- displays menu items with prices as checkboxes -->
             <input type="checkbox" id="fried_chicken" name="order" value="Fried Chicken|16">
             <label for="fried_chicken">Fried Chicken $16</label><br>
             <h4 id="add_on">Add on:</h4>
@@ -57,4 +57,4 @@ food and sends to confirmation page when submitted -->
     </form>
 </div>
     
-{% endblock %}
+{% endblock %} <!-- page specific content ends here -->

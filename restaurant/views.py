@@ -7,7 +7,7 @@ import random
 import time
 
 
-def main_page(request):
+def main(request):
     """Respond to the URL 'main', delegate work to main template."""
 
     template_name = "restaurant/main.html"
@@ -43,7 +43,7 @@ specials = [
 ]  # daily specials
 
 
-def order_page(request):
+def order(request):
     """Respond to the URL 'order', delegate work to order template."""
 
     template_name = "restaurant/order.html"
@@ -56,8 +56,8 @@ def order_page(request):
     return render(request, template_name, context)
 
 
-def confirmation_page(request):
-    """Process the order form submission, and generate a confirmation,
+def confirmation(request):
+    """Process the order form submission POST information, and generate a confirmation,
     delegate work to confirmation template."""
 
     template_name = "restaurant/confirmation.html"
@@ -74,27 +74,32 @@ def confirmation_page(request):
         # separates ordered dish names and prices and converts prices to ints
         for o in order:
             orderSelected.append(o.split("|")[0])
-            if o.split("|")[0] in specials:
-                pricesSelected.append(20)
-            else:
-                pricesSelected.append(int(o.split("|")[1]))
+            pricesSelected.append(int(o.split("|")[1]))
+            # converts price to integer instead of string for summing total price later
 
         totalPrice = sum(pricesSelected)
 
-        # combines ordered dish names and int prices
-        pairs = []
+        pairs = []  # will hold pairs of dish names and int prices
+        # for loop combines ordered dish names and int prices
         for p in range(len(orderSelected)):
             pairs.append((orderSelected[p], pricesSelected[p]))
 
+        # set variables to corresponding information posted from the order
+        # submission
         special_instructions = request.POST["special_instructions"]
         name = request.POST["name"]
         phone_number = request.POST["phone_number"]
         email = request.POST["email"]
 
-        # create pick up time
+        # create ready time
         current_time = time.time()
-        seconds = 60 * random.randint(30, 60)
-        pick_up_time = time.ctime(current_time + seconds)
+        # gives the current time in seconds
+
+        cooking_time = 60 * random.randint(30, 60)
+        # picks a random number between 30 and 60 minutes and converts to seconds
+
+        ready_time = time.ctime(current_time + cooking_time)
+        # adds the current time and cooking time and gets the ready time in military time
 
         context = {
             "pairs": pairs,
@@ -103,7 +108,7 @@ def confirmation_page(request):
             "name": name,
             "phone_number": phone_number,
             "email": email,
-            "time": pick_up_time,
+            "ready_time": ready_time,
         }
 
     return render(request, template_name=template_name, context=context)

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "formdata",
     "quotes",
     "restaurant",  # installs new restaurant app to cs412 project
+    "blog",
 ]
 
 MIDDLEWARE = [

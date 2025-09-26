@@ -1,12 +1,17 @@
-{% extends 'mini_insta/base.html' %}
+<!-- File: mini_insta/show_all_profiles.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/26/2025
+Description: Displays information for all mini_insta profiles -->
 
-{% block content %}
+
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
 <h1>
     All Profiles
 </h1>
 
 <main class="grid-container">
-    {% for profile in profiles %}
+    {% for profile in profiles %} <!--use a for to display all of the profiles-->
     <profile>
         <div>
             <h2>{{profile.username}}</h2>
@@ -18,4 +23,4 @@
     </profile>
     {% endfor %}
 </main>
-{% endblock %}
+{% endblock %} <!-- page specific content ends here -->

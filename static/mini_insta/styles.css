@@ -1,4 +1,7 @@
 /* This CSS was derived from NetNinja's multi-column grid example. */
+/* # File: mini_insta/styles.css
+# Author: Clarissa Chen (clchen5@bu.edu), 9/26/2025
+# Description: Specifies styling for mini_insta app */
 
 body {
     margin: 30px;
@@ -33,6 +36,7 @@ header {
     grid-gap: 10px;
     max-width: 1200px;
     margin: 20px auto;
+    padding: 20px
 }
 
 .large {

@@ -1,3 +1,7 @@
+# File: mini_insta/models.py
+# Author: Clarissa Chen (clchen5@bu.edu), 9/26/2025
+# Description: Defines the Profile model.
+
 from django.db import models
 
 

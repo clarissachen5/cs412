@@ -1,6 +1,10 @@
-{% extends 'mini_insta/base.html' %}
+<!-- File: mini_insta/show_profile.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/26/2025
+Description: Displays information for one mini_insta profile -->
 
-{% block content %}
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
 <h1>{{profile.username}}</h1>
     
     <profile_page>
@@ -16,11 +20,7 @@
             <img src="{{profile.profile_image_url}}" alt="">
         </div>
         <h3>Posts Placeholder</h3>
-        
     
     </profile_page>
-    
-    
 
-
-{% endblock %}
+{% endblock %} <!-- page specific content ends here -->

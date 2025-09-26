@@ -1,20 +1,24 @@
-{% load static %}
+<!-- File: mini_insta/base.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/26/2025
+Description: Creates base template for all pages in mini_insta app -->
+
+{% load static %} <!-- makes static files available for use of styles.css later -->
 
 <html>
     <head>
         <title>Mini Insta</title>
-        <link rel="stylesheet" href="{% static 'mini_insta/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'mini_insta/styles.css' %}"> <!--specifies the styling-->
     </head>
 
     <body>
         <head>
             <h1>Fruits & Veg Insta</h1>
-            
-
         </head>
 
-        {% block content %}
-        {% endblock %}
+        <!-- put page specific content here -->
+         {% block content %}
+         {% endblock %}
+        <!-- end page specific content -->
 
         <nav>
                 <ul>

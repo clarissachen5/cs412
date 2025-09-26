@@ -1,3 +1,8 @@
+# File: mini_insta/views.py
+# Author: Clarissa Chen (clchen5@bu.edu), 9/26/2025
+# Description: Configures views specific to mini_insta app.
+
+
 from django.shortcuts import render
 
 # Create your views here.

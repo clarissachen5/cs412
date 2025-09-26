@@ -9,15 +9,17 @@
     <body>
         <head>
             <h1>Fruits & Veg Insta</h1>
-            <nav>
-                <ul>
-                    
-                </ul>
-            </nav>
+            
 
         </head>
 
         {% block content %}
         {% endblock %}
+
+        <nav>
+                <ul>
+                    <li><a href="{% url 'show_all_profiles'%}">Show All Profiles</a></li>
+                </ul>
+            </nav>
     </body>
 </html>

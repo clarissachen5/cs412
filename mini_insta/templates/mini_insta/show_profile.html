@@ -2,21 +2,25 @@
 
 {% block content %}
 <h1>{{profile.username}}</h1>
-<main class="grid-container">
-    <profile>
-        <div>
-            <h2>{{profile.username}}</h2>
-            <h3>{{profile.display_name}}</h3>
-            <div>
-                <img src="{{profile.profile_image_url}}" alt="">
-            </div>
-            <p>Bio: {{profile.bio_text}}</p>
-            <h3>Followers: </h3>
-            <h3>Following: </h3>
-            <h4>Joined on {{profile.join_date}}</h4>
-            <h3>Posts Placeholder</h3>
+    
+    <profile_page>
+    
+        <h2>{{profile.username}}</h2>
+        <h3>{{profile.display_name}}</h3>
+        
+        <p>Bio: {{profile.bio_text}}</p>
+        <h3>Followers: </h3>
+        <h3>Following: </h3>
+        <h3>Joined on {{profile.join_date}}</h3>
+        <div class="large">
+            <img src="{{profile.profile_image_url}}" alt="">
         </div>
-    </profile>
-</main>
+        <h3>Posts Placeholder</h3>
+        
+    
+    </profile_page>
+    
+    
+
 
 {% endblock %}

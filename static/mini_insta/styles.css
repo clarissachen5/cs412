@@ -2,7 +2,7 @@
 
 body {
     margin: 30px;
-    background: #d1dedd;
+    background: #d15eeb;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -11,12 +11,13 @@ ul, li {
     list-style-type: none;
 }
 
-h1, h2, h3 {
-    color: #767f7e;
+h1, h2, h3, h4 {
+    color: white;
+    text-align: center;
 }
 
 p {
-    color: #828b82;
+    color: white;
 }
 
 header {
@@ -25,17 +26,26 @@ header {
     border-bottom: 1px solid #bbc7c7;
 }
 .grid-container {
-    background: #eee;
+    background: #a28af2;
     max-width: 900px;
     display: grid;
-    /* grid-template-columns: 300px 300px 300px; */
     grid-template-columns: repeat(3, 1fr);
-     grid-gap: 10px;
+    grid-gap: 10px;
     max-width: 1200px;
     margin: 20px auto;
 }
 
-article.featured {
+.large {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    
+}
+
+
+profile.featured {
     grid-column: span 3;
     display: grid; /* nested grid */
     gap: 60px;
@@ -45,23 +55,46 @@ article.featured {
     padding-bottom: 40px;
 }
 
-article img, article.featured img {
-    width: 100%;
+profile img, profile.featured img {
+    width: 90%;
+    height: 70%;
     border: 4px solid #fff;
     border-radius: 8px;
+    padding: 10px;
+    align-items: center;
 }
-article p, article h3 {
+profile p, profile h3, profile h2, profile h1 {
     margin: 20px 10px;
+    /* text-align: left; */
+
+}
+
+profile_page img, profile_page.featured img {
+    width: 80%;
+    border: 4px solid #fff;
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
+}
+
+profile_page p, profile_page h3, profile_page h2, profile_page h1 {
+    margin: 20px 10px;
+    text-align: left;
+    align-items: center;
+    padding-left: 250px;
+    
 
 }
 
 nav li {
     display: inline;
+    padding-left: 200px;
+    font-size: 20px;
 }
 /* responsive styles: adapt to smaller screen sizes */
 @media screen and (max-width: 980px) {
 
-    article {
+    profile {
         grid-column: span 3;
         display: grid; /* nested grid */
         grid-template-columns: 1fr 1fr;
@@ -72,9 +105,11 @@ nav li {
 
 @media screen and (max-width: 760px) {
 
-    article, article.featured {
+    profile, profile.featured {
         
         display: block; 
         margin: 0px 20px;
     }
 }
+
+

@@ -8,19 +8,16 @@ Description: Displays information for creating a Post on mini_insta -->
 
 {% block content %} <!-- page specific content starts here -->
 <h1>Create a Post</h1>
-
-<form action="{% url 'create_post' pk=profile.pk %}" method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    Image URL: <input type="text" name="image_url">
-    <input type="submit" name="submit" value="Submit">
-    <button type="button" onclick='window.location.href="{% url "show_profile" pk=profile.pk %}"'> Cancel
-    </button>
-  
-
-     <!-- <a href="{% url 'show_profile' pk=profile.pk %}">Cancel</a> -->
-
+<div class="create">
+    <form action="{% url 'create_post' pk=profile.pk %}" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        Image URL: <input type="text" name="image_url">
+        <input type="submit" name="submit" value="Submit">
+        <button type="button" onclick='window.location.href="{% url "show_profile" pk=profile.pk %}"'> Cancel
+        </button>
     
+    </form>
+</div>
 
-</form>
 {% endblock %} <!-- page specific content ends here -->

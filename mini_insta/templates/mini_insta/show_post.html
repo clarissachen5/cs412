@@ -1,0 +1,22 @@
+<!-- File: mini_insta/show_post.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/3/2025
+Description: Displays information for one mini_insta Post -->
+
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>{{post.profile}}</h1>
+    
+    <h2>{{post.caption}}</h2>
+    <h3>{{post.timestamp}}</h3>
+   
+    {% for photo in post.get_all_photos %}  
+        <div>
+            <img src="{{photo.image_url}}" alt="">
+        </div> 
+        
+    {% endfor %}
+           
+
+
+{% endblock %} <!-- page specific content ends here -->

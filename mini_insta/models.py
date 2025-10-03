@@ -16,5 +16,43 @@ class Profile(models.Model):
     join_date = models.TextField(blank=True)
 
     def __str__(self):
-        """return a string representation of this model instance."""
+        """Return a string representation of this model instance."""
         return f"username: {self.username}, display name: {self.display_name}"
+
+    def get_all_posts(self):
+        """Return a QuerySet of Posts by this Profile."""
+
+        posts = Post.objects.filter(profile=self).order_by(
+            "-timestamp"
+        )  # the negative before timestamp shows descending
+        return posts
+
+
+class Post(models.Model):
+    """Encapsulate the data of a Post by a user (Profile)"""
+
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+    caption = models.TextField(blank=True)
+
+    def __str__(self):
+        """Return a string representation of this model instance."""
+        return f"profile: {self.profile}, timestamp: {self.timestamp}, caption: {self.caption}"
+
+    def get_all_photos(self):
+        """Return a QuerySet of Photos for a given Post."""
+
+        photos = Photo.objects.filter(post=self)
+        return photos
+
+
+class Photo(models.Model):
+    """Encapsulate the data of a Photo for a Post"""
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    image_url = models.URLField(blank=True)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Return a string representation of this model instance."""
+        return f"post: {self.post}, image_url: {self.image_url}, timestamp: {self.timestamp}"

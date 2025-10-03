@@ -20,7 +20,15 @@ Description: Displays information for one mini_insta profile -->
             <img src="{{profile.profile_image_url}}" alt="">
         </div>
         <h3>Posts Placeholder</h3>
-    
+        {% for post in profile.get_all_posts %}
+            <div>
+                {% with photo=post.get_all_photos|first %}   
+                    <a href="{% url 'show_post' post.pk %}"><img src="{{photo.image_url}}" alt=""></a>
+        
+                {% endwith %}
+                
+            </div>
+        {% endfor %}
     </profile_page>
 
 {% endblock %} <!-- page specific content ends here -->

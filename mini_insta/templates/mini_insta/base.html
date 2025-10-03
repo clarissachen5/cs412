@@ -23,6 +23,9 @@ Description: Creates base template for all pages in mini_insta app -->
         <nav>
                 <ul>
                     <li><a href="{% url 'show_all_profiles'%}">Show All Profiles</a></li>
+                    {% if profile %}
+                        <li><a href="{% url 'create_post' pk=profile.pk %}">Create a Post</a></li>
+                    {% endif %}
                 </ul>
             </nav>
     </body>

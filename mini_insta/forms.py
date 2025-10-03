@@ -1,0 +1,16 @@
+# File: mini_insta/forms.py
+# Author: Clarissa Chen (clchen5@bu.edu), 10/3/2025
+# Description: Define the forms that we use for create/update/delete operations for mini_insta.
+
+from django import forms
+from .models import *
+
+
+class CreatePostForm(forms.ModelForm):
+    """A form to add a Post to the database."""
+
+    class Meta:
+        """Associate this form with a the Post model from our database."""
+
+        model = Post
+        fields = ["caption"]

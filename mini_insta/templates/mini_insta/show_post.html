@@ -11,6 +11,7 @@ Description: Displays information for one mini_insta Post -->
     <h3>{{post.timestamp}}</h3>
    
     {% for photo in post.get_all_photos %}  
+    <!-- show all photos for the post -->
         <div>
             <img src="{{photo.image_url}}" alt="">
         </div> 

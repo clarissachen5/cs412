@@ -3,6 +3,7 @@
 # Description: Defines the Profile model.
 
 from django.db import models
+from django.urls import reverse
 
 
 # Create your models here.
@@ -26,6 +27,10 @@ class Profile(models.Model):
             "-timestamp"
         )  # the negative before timestamp shows descending
         return posts
+
+    def get_absolute_url(self):
+        """Return a URL to display the updated Profile."""
+        return reverse("show_profile", kwargs={"pk": self.pk})
 
 
 class Post(models.Model):

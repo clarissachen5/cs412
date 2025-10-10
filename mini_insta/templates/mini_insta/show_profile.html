@@ -16,10 +16,12 @@ Description: Displays information for one mini_insta profile -->
         <h3>Followers: </h3>
         <h3>Following: </h3>
         <h3>Joined on {{profile.join_date}}</h3>
-
-        <a href="{% url 'update_profile' profile.pk %}">
-            <button type="button">Update Profile</button>
-        </a>
+        <div class="buttons">
+            <a href="{% url 'update_profile' profile.pk %}">
+                        <button type="button">Update Profile</button>
+                    </a>
+        </div>
+       
         <div class="large">
             <img src="{{profile.profile_image_url}}" alt="">
         </div>

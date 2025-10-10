@@ -11,12 +11,25 @@ Description: Displays information for updating a Profile on mini_insta -->
 <div class="update">
     <form action="{% url 'update_profile' profile.pk %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        Display name: <input type="text" name="display_name" value="{{profile.display_name}}">
-        Profile image url: <input type="text" name="profile_image_url" value="{{profile.profile_image_url}}">
-        Bio text: <input type="text" name="bio_text" value="{{profile.bio_text}}">
+        <div>
+             <label>Display name:</label>
+            <input type="text" name="display_name" value="{{profile.display_name}}">
+            <br>
+        </div>
 
-        <input type="submit" name="submit" value="Update">
-    
+        <div>
+             <label>Profile image url:</label>
+             <input type="text" name="profile_image_url" value="{{profile.profile_image_url}}">
+             <br>
+        </div>
+
+        <div>
+            <label>Bio text: </label>
+            <input type="text" name="bio_text" value="{{profile.bio_text}}">
+            <br>
+        </div>
+        
+      <input type="submit" name="submit" value="Update">
     </form>
 
     <form action="{% url 'show_profile' profile.pk %}" method="GET">

@@ -9,13 +9,18 @@ Description: Displays information for creating a Post on mini_insta -->
 {% block content %} <!-- page specific content starts here -->
 <h1>Create a Post</h1>
 <div class="create">
-    <form action="{% url 'create_post' pk=profile.pk %}" method="POST">
+    <form action="{% url 'create_post' pk=profile.pk %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
-        Image URL: <input type="text" name="image_url">
+        Select Photos: <input type="file" name="files" multiple>
         <input type="submit" name="submit" value="Submit">
+
+        <a href="{% url 'show_profile' pk=profile.pk %}">
+             <button type="button">Cancel</button>
+        </a>
+<!--        
         <button type="button" onclick='window.location.href="{% url "show_profile" pk=profile.pk %}"'> Cancel
-        </button>
+        </button> -->
     
     </form>
 </div>

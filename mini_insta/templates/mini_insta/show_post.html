@@ -9,11 +9,11 @@ Description: Displays information for one mini_insta Post -->
     
     <h2>{{post.caption}}</h2>
     <h3>{{post.timestamp}}</h3>
-   
+   <!-- {{post.get_all_photos}} -->
     {% for photo in post.get_all_photos %}  
     <!-- show all photos for the post -->
         <div>
-            <img src="{{photo.image_url}}" alt="">
+            <img src="{{ photo.get_image_url }}" alt="Some photo">
         </div> 
         
     {% endfor %}

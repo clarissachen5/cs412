@@ -69,11 +69,16 @@ class CreatePostView(CreateView):
         # attach this profile to the post
         form.instance.profile = profile  # set the PK
 
+        post = form.save()  # saves caption into post
+
+        # image_url = self.request.POST.get("image_url")
+        files = self.request.FILES.getlist("files")
+        print(files)
+        if files:
+            for file in files:
+                Photo.objects.create(post=post, image_file=file)
+
         # saves the post
         response = super().form_valid(form)
-
-        image_url = self.request.POST.get("image_url")
-        if image_url:
-            Photo.objects.create(post=self.object, image_url=image_url)
         # delegate the work to the superclass method form_valid:
         return response

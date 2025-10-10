@@ -28,7 +28,7 @@ Description: Displays information for one mini_insta profile -->
                 <div>
                     {% with photo=post.get_all_photos|first %}
                     <!-- ensures only the first photo is show for the post -->
-                        <a href="{% url 'show_post' post.pk %}"><img src="{{photo.image_url}}" alt=""></a>
+                        <a href="{% url 'show_post' post.pk %}"><img src="{{photo.get_image_url}}" alt=""></a>
             
                     {% endwith %}
                     

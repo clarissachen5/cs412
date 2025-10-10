@@ -14,8 +14,9 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
+from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm, CreatePhotoForm
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 class ProfileListView(ListView):
@@ -154,3 +155,51 @@ class DeletePhotoView(DeleteView):
         photo = Photo.objects.get(pk=pk)
         post = photo.post
         return reverse("show_post", kwargs={"pk": post.pk})
+
+
+class CreatePhotoView(CreateView):
+    """A view to handle creation of new Photos.
+    (1) display the HTML form to user (GET)
+    (2) process the form submission and store the new Photo objects (POST)"""
+
+    form_class = CreatePhotoForm
+    template_name = "mini_insta/create_photo_form.html"
+
+    def get_context_data(self, **kwargs):
+        """Return the primary key of the Profile making the post."""
+        context = super().get_context_data(**kwargs)
+        post = Post.objects.get(pk=self.kwargs["pk"])
+        context["post"] = post
+        return context
+
+    def get_success_url(self):
+        """Provide a URL to redirect to after creating a new Photo."""
+
+        # call reverse to generate the URL for this Post's associated Profile.
+        return reverse("show_post", kwargs={"pk": self.kwargs["pk"]})
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new object to the Django database.
+        We need to add the foreign key (of the Post) to the Photo object before saving it to the database.
+        """
+        print(form.cleaned_data)
+
+        # retrieve the PK from the URL pattern
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+        # attach the post to these photos
+        form.instance.post = post  # set the PK
+
+        # photo = form.save()  # saves caption into post
+
+        # image_url = self.request.POST.get("image_url")
+        files = self.request.FILES.getlist("files")
+        print(files)
+        if files:
+            for file in files:
+                Photo.objects.create(post=post, image_file=file)
+
+        # saves the post
+        # response = super().form_valid(form)
+        # delegate the work to the superclass method form_valid:
+        return HttpResponseRedirect(self.get_success_url())

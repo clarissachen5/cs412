@@ -31,6 +31,10 @@ Description: Displays information for one mini_insta Post -->
             <a href="{% url 'update_post' post.pk %}">
                 <button type="button">Update</button>
             </a>
+
+             <a href="{% url 'create_photo' post.pk %}">
+                <button type="button">Add Photos</button>
+            </a>
         </div>
 
     </div>

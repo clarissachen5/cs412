@@ -16,6 +16,16 @@ class CreatePostForm(forms.ModelForm):
         fields = ["caption"]
 
 
+class CreatePhotoForm(forms.ModelForm):
+    """A form to add a Photo to the database."""
+
+    class Meta:
+        """Associate this form with a the Photo model from our database."""
+
+        model = Photo
+        fields = ["image_file"]
+
+
 class UpdateProfileForm(forms.ModelForm):
     """A form to handle an update to a Profile."""
 

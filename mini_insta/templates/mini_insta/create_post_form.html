@@ -11,7 +11,7 @@ Description: Displays information for creating a Post on mini_insta -->
 <div class="create">
     <form action="{% url 'create_post' pk=profile.pk %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form.as_p}}  <!-- Displays form values like caption -->
         Select Photos: <input type="file" name="files" multiple>
         <input type="submit" name="submit" value="Submit">
 

@@ -68,6 +68,7 @@ class Photo(models.Model):
         return f"post: {self.post}, image_url: {self.get_image_url()}, timestamp: {self.timestamp}"
 
     def get_image_url(self):
+        """Returns the corresponding url for the image url/file."""
         if self.image_url:
             print(self.image_url)
             return self.image_url

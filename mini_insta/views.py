@@ -179,7 +179,7 @@ class CreatePhotoView(CreateView):
         return reverse("show_post", kwargs={"pk": self.kwargs["pk"]})
 
     def form_valid(self, form):
-        """This method handles the form submission and saves the new object to the Django database.
+        """This method handles the form submission and saves the new photo objects to the Django database.
         We need to add the foreign key (of the Post) to the Photo object before saving it to the database.
         """
         print(form.cleaned_data)
@@ -188,18 +188,13 @@ class CreatePhotoView(CreateView):
         pk = self.kwargs["pk"]
         post = Post.objects.get(pk=pk)
         # attach the post to these photos
-        form.instance.post = post  # set the PK
 
-        # photo = form.save()  # saves caption into post
-
-        # image_url = self.request.POST.get("image_url")
+        # for each photo submitted create a new photo
         files = self.request.FILES.getlist("files")
         print(files)
         if files:
             for file in files:
                 Photo.objects.create(post=post, image_file=file)
 
-        # saves the post
-        # response = super().form_valid(form)
-        # delegate the work to the superclass method form_valid:
+        # call get success url to redirect to show_post
         return HttpResponseRedirect(self.get_success_url())

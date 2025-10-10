@@ -16,6 +16,9 @@ Description: Displays information for one mini_insta Post -->
         <!-- show all photos for the post -->
             <div>
                 <img src="{{ photo.get_image_url }}" alt="Some photo">
+                <a href="{% url 'delete_photo' photo.pk %}">
+                    <button type="button">Delete Photo</button>
+                </a>
             </div> 
             
         {% endfor %}

@@ -98,6 +98,14 @@ class UpdateProfileView(UpdateView):
     template_name = "mini_insta/update_profile_form.html"
 
 
+class UpdatePostView(UpdateView):
+    """View class to handle update of a Post based on its PK."""
+
+    model = Post
+    template_name = "mini_insta/update_post_form.html"
+    fields = ["caption"]
+
+
 class DeletePostView(DeleteView):
     """View class to delete a Post from a Profile."""
 

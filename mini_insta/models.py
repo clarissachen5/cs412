@@ -50,6 +50,10 @@ class Post(models.Model):
         photos = Photo.objects.filter(post=self)
         return photos
 
+    def get_absolute_url(self):
+        """Return a URL to display the updated Post."""
+        return reverse("show_post", kwargs={"pk": self.pk})
+
 
 class Photo(models.Model):
     """Encapsulate the data of a Photo for a Post"""

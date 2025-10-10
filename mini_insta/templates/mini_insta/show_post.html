@@ -21,5 +21,9 @@ Description: Displays information for one mini_insta Post -->
     <a href="{% url 'delete_post' post.pk %}">
         <button type="button">Delete</button>
     </a>
+    
+    <a href="{% url 'update_post' post.pk %}">
+        <button type="button">Update</button>
+    </a>
 
 {% endblock %} <!-- page specific content ends here -->

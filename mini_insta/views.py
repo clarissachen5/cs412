@@ -6,7 +6,13 @@
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 from .models import Profile, Post, Photo
 from .forms import CreatePostForm, UpdateProfileForm
 from django.urls import reverse
@@ -90,3 +96,28 @@ class UpdateProfileView(UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
+
+
+class DeletePostView(DeleteView):
+    """View class to delete a Post from a Profile."""
+
+    model = Post
+    template_name = "mini_insta/delete_post_form.html"
+
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+        context["post"] = post
+        context["profile"] = post.profile
+
+        return context
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful delete."""
+        pk = self.kwargs["pk"]
+        post = Post.objects.get(pk=pk)
+        profile = post.profile
+        return reverse("show_profile", kwargs={"pk": profile.pk})

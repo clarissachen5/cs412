@@ -20,6 +20,7 @@ Description: Displays information for updating a Profile on mini_insta -->
     </form>
 
     <form action="{% url 'show_profile' profile.pk %}" method="GET">
+        {% csrf_token %}
         <input type="submit" value="Cancel">
     </form>
 </div>

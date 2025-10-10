@@ -18,6 +18,8 @@ Description: Displays information for one mini_insta Post -->
         
     {% endfor %}
            
-
+    <a href="{% url 'delete_post' post.pk %}">
+        <button type="button">Delete</button>
+    </a>
 
 {% endblock %} <!-- page specific content ends here -->

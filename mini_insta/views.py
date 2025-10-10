@@ -14,7 +14,7 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm, UpdateProfileForm
+from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
 from django.urls import reverse
 
 
@@ -102,8 +102,8 @@ class UpdatePostView(UpdateView):
     """View class to handle update of a Post based on its PK."""
 
     model = Post
+    form_class = UpdatePostForm
     template_name = "mini_insta/update_post_form.html"
-    fields = ["caption"]
 
 
 class DeletePostView(DeleteView):
@@ -129,3 +129,28 @@ class DeletePostView(DeleteView):
         post = Post.objects.get(pk=pk)
         profile = post.profile
         return reverse("show_profile", kwargs={"pk": profile.pk})
+
+
+class DeletePhotoView(DeleteView):
+    """View class to delete a Photo from a Post."""
+
+    model = Photo
+    template_name = "mini_insta/delete_photo_form.html"
+
+    def get_context_data(self, **kwargs):
+        """Return the dictionary of context variables for use in the template."""
+
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs["pk"]
+        photo = Photo.objects.get(pk=pk)
+        context["photo"] = photo
+        context["post"] = photo.post
+
+        return context
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful delete."""
+        pk = self.kwargs["pk"]
+        photo = Photo.objects.get(pk=pk)
+        post = photo.post
+        return reverse("show_post", kwargs={"pk": post.pk})

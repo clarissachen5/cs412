@@ -72,6 +72,17 @@ class Profile(models.Model):
 
         return count
 
+    def get_post_feed(self):
+        """Return the post feed for this Profile."""
+
+        profilesFollowing = self.get_following()
+
+        followingPosts = Post.objects.filter(profile__in=profilesFollowing).order_by(
+            "-timestamp"
+        )
+
+        return followingPosts
+
 
 class Post(models.Model):
     """Encapsulate the data of a Post by a user (Profile)"""

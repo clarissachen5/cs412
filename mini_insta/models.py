@@ -94,6 +94,25 @@ class Post(models.Model):
         """Return a URL to display the updated Post."""
         return reverse("show_post", kwargs={"pk": self.pk})
 
+    def get_all_comments(self):
+        """Return a QuerySet of Comments for this Post."""
+
+        comments = Comment.objects.filter(post=self)
+        return comments
+
+    def get_likes(self):
+        """Return a QuerySet of Likes for this Post."""
+
+        likes = Like.objects.filter(post=self)
+
+        likeProfiles = []
+        count = 0
+        for like in likes:
+            likeProfiles.append(like.profile)
+            count += 1
+
+        return likeProfiles[0], count - 1
+
 
 class Photo(models.Model):
     """Encapsulate the data of a Photo for a Post"""
@@ -131,3 +150,30 @@ class Follow(models.Model):
     def __str__(self):
         """Return a string representation of this model instance."""
         return f"profile: {self.profile}, profile username: {self.profile.username}, follower_profile: {self.follower_profile}, follower username: {self.follower_profile.username}, timestamp: {self.timestamp}"
+
+
+class Comment(models.Model):
+    """Encapsulate the data of a Comment for a Post."""
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+    text = models.TextField(blank=False)
+
+    def __str__(self):
+        """Return a string representation of this model instance."""
+        return f"post: {self.post}, profile: {self.profile}, timestamp: {self.timestamp}, text: {self.text}"
+
+
+class Like(models.Model):
+    """Encapsulate the data of a Like by a Profile for a Post."""
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Return a string representation of this model instance."""
+        return (
+            f"post: {self.post}, profile: {self.profile}, timestamp: {self.timestamp}"
+        )

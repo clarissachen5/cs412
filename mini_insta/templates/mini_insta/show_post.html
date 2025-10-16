@@ -7,8 +7,7 @@ Description: Displays information for one mini_insta Post -->
 {% block content %} <!-- page specific content starts here -->
 <h1>{{post.profile}}</h1>
     
-    <h2>{{post.caption}}</h2>
-    <h3>{{post.timestamp}}</h3>
+    
 
     <div id="show_post">
     
@@ -21,6 +20,13 @@ Description: Displays information for one mini_insta Post -->
                 </a>
             </div> 
             
+        {% endfor %}
+
+        <h2>Liked by {{post.get_likes.0}} and {{post.get_likes.1}} others </h2>
+        <h2>{{post.caption}}</h2>
+        <h3>{{post.timestamp}}</h3>
+        {% for comment in post.get_all_comments %}
+            <h4>{{comment.profile.username}}: {{comment.text}}</h4>
         {% endfor %}
         
         <div>

@@ -32,6 +32,46 @@ class Profile(models.Model):
         """Return a URL to display the updated Profile."""
         return reverse("show_profile", kwargs={"pk": self.pk})
 
+    def get_followers(self):
+        """Return a list of Profiles who are followers of this Profile."""
+        followers = Follow.objects.filter(profile=self)
+        followerProfiles = []
+
+        for follower in followers:
+            followerProfiles.append(follower.follower_profile)
+
+        return followerProfiles
+
+    def get_num_followers(self):
+        """Return the count of Followers."""
+
+        followers = self.get_followers()
+        count = 0
+        for _ in followers:
+            count += 1
+
+        return count
+
+    def get_following(self):
+        """Return the Profiles followed by this Profile."""
+        following = Follow.objects.filter(follower_profile=self)
+        followingProfiles = []
+
+        for follow in following:
+            followingProfiles.append(follow.profile)
+
+        return followingProfiles
+
+    def get_num_following(self):
+        """Return the count of Following."""
+
+        following = self.get_following()
+        count = 0
+        for _ in following:
+            count += 1
+
+        return count
+
 
 class Post(models.Model):
     """Encapsulate the data of a Post by a user (Profile)"""
@@ -75,3 +115,19 @@ class Photo(models.Model):
         else:
             print(self.image_file)
             return self.image_file.url
+
+
+class Follow(models.Model):
+    """Encapsulate the data of a Follower for a Profile"""
+
+    profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="profile"
+    )
+    follower_profile = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="follower_profile"
+    )
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Return a string representation of this model instance."""
+        return f"profile: {self.profile}, profile username: {self.profile.username}, follower_profile: {self.follower_profile}, follower username: {self.follower_profile.username}, timestamp: {self.timestamp}"

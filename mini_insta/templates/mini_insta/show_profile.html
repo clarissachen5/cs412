@@ -13,8 +13,14 @@ Description: Displays information for one mini_insta profile -->
         <h3>{{profile.display_name}}</h3>
         
         <p>Bio: {{profile.bio_text}}</p>
-        <h3>Followers: </h3>
-        <h3>Following: </h3>
+
+        <a href="{% url 'followers' profile.pk %}">
+            <h3>Followers: {{profile.get_num_followers}}</h3> 
+        </a>
+        <a href="{% url 'following' profile.pk %}">
+            <h3>Following: {{profile.get_num_following}} </h3>
+        </a>
+        
         <h3>Joined on {{profile.join_date}}</h3>
         <div class="buttons">
             <a href="{% url 'update_profile' profile.pk %}">

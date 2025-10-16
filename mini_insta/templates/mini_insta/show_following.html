@@ -1,0 +1,26 @@
+<!-- File: mini_insta/show_following.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/16/2025
+Description: Displays information for profiles that a profile follows -->
+
+
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>
+    Following
+</h1>
+
+<main class="grid-container">
+    {% for follow in profile.get_following %} <!--use a for to display all of the profiles-->
+    <profile>
+        <div>
+            <h2>{{follow.username}}</h2>
+            <h3>{{follow.display_name}}</h3>
+            <a href="{% url 'show_profile' follow.pk %}">
+                <img src="{{follow.profile_image_url}}" alt="">
+            </a>
+            </div>
+    </profile>
+    {% endfor %}
+</main>
+{% endblock %} <!-- page specific content ends here -->

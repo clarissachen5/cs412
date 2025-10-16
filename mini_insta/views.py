@@ -13,7 +13,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from .models import Profile, Post, Photo
+from .models import Profile, Post, Photo, Follow
 from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm, CreatePhotoForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -198,3 +198,19 @@ class CreatePhotoView(CreateView):
 
         # call get success url to redirect to show_post
         return HttpResponseRedirect(self.get_success_url())
+
+
+class ShowFollowersDetailView(DetailView):
+    """Define a view class to show Followers for a Profile"""
+
+    model = Profile
+    template_name = "mini_insta/show_followers.html"
+    context_object_name = "profile"
+
+
+class ShowFollowingDetailView(DetailView):
+    """Define a view class to show profiles a Profile is Following"""
+
+    model = Profile
+    template_name = "mini_insta/show_following.html"
+    context_object_name = "profile"

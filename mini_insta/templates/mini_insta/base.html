@@ -26,6 +26,7 @@ Description: Creates base template for all pages in mini_insta app -->
                     
                     {% if profile %}
                     <!-- if profile is passed as a context variable,6 show link -->
+                        <li><a href="{% url 'feed' pk=profile.pk %}">Home</a></li>
                         <li><a href="{% url 'create_post' pk=profile.pk %}">Create a Post</a></li>
                     {% endif %}
                 </ul>

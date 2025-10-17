@@ -1,0 +1,63 @@
+<!-- File: mini_insta/show_feed.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/17/2025
+Description: Displays information for a Profile's feed of Posts -->
+
+
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>
+    {{profile.username}}'s Feed
+</h1>
+
+    {% for post in posts %} <!--use a for to display all of the profiles-->
+
+        <div>
+            <h2>{{post.profile.username}}</h2>
+            <a href="{% url 'show_profile' post.profile.pk %}">
+                <img src="{{post.profile_image_url}}" alt="">
+            </a>
+            </div>
+ 
+
+        <div id="show_post">
+        
+            <div>
+                {% with photo=post.get_all_photos|first %}
+                <!-- ensures only the first photo is show for the post -->
+                    <a href="{% url 'show_post' post.pk %}"><img src="{{photo.get_image_url}}" alt=""></a>
+        
+                {% endwith %}
+                
+            </div>
+
+            <!-- {% with likes=post.get_likes %} -->
+                <!-- {% if likes|length > 1 %}  
+                    {% with first_like=likes|first %}     
+                    <h2>Liked by {{ first_like.profile.username }} and {{ likes|length|add:"-1" }} others </h2>
+                    {% endwith %}
+                {% elif likes|length == 1%}
+                    <h2>Liked by {{ likes.0.profile.username }} </h2>
+                {% else %}
+                    <h2>0 Likes</h2>
+                {% endif %} -->
+            <h2>Likes: {{post.get_likes}} </h2>
+                    
+                    
+                
+            <!-- {% endwith %} -->
+        
+            <h2>{{post.caption}}</h2>
+            <h3>{{post.timestamp}}</h3>
+            {% for comment in post.get_all_comments %}
+                <h4>{{comment.profile.username}}: {{comment.text}}</h4>
+            {% endfor %}
+            
+
+        </div>
+        
+
+
+    {% endfor %}
+
+{% endblock %} <!-- page specific content ends here -->

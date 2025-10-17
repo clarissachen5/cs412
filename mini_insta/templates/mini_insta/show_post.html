@@ -22,7 +22,7 @@ Description: Displays information for one mini_insta Post -->
             
         {% endfor %}
 
-        <h2>Liked by {{post.get_likes.0}} and {{post.get_likes.1}} others </h2>
+        <h2>Liked by {{post.get_likes}} </h2>
         <h2>{{post.caption}}</h2>
         <h3>{{post.timestamp}}</h3>
         {% for comment in post.get_all_comments %}

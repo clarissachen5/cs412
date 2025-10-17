@@ -122,7 +122,7 @@ class Post(models.Model):
             likeProfiles.append(like.profile)
             count += 1
 
-        return likeProfiles[0], count - 1
+        return count
 
 
 class Photo(models.Model):

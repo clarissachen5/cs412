@@ -232,3 +232,54 @@ class PostFeedListView(ListView):
         post_feed = profile.get_post_feed()
         context["posts"] = post_feed
         return context
+
+
+class SearchView(ListView):
+    """Define a view class for search."""
+
+    model = Post
+    template_name = "mini_insta/search_results.html"
+    context_object_name = "posts"
+
+    def dispatch(self, request, *args, **kwargs):
+        """Dispatches any request."""
+        self.profile = Profile.objects.get(pk=self.kwargs["pk"])
+        self.query = request.GET.get("query", "")
+        if self.query == "":
+            return render(request, "mini_insta/search.html", {"profile": self.profile})
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        if self.query:
+            posts = Post.objects.filter(caption__contains=self.query).order_by(
+                "-timestamp"
+            )
+            return posts
+        else:
+            return Post.objects.none()
+
+    def get_context_data(self, **kwargs):
+        """Return the posts and profiles searched."""
+
+        context = super().get_context_data(**kwargs)
+        context["profile"] = self.profile
+
+        if self.query:
+            context["query"] = self.query
+            context["posts"] = self.get_queryset()
+
+            usernames = Profile.objects.filter(username__contains=self.query)
+            display_names = Profile.objects.filter(display_name__contains=self.query)
+            bio_texts = Profile.objects.filter(bio_text__contains=self.query)
+            all = list(usernames) + list(display_names) + list(bio_texts)
+            profiles = []
+
+            for profile in all:  # remove duplicates from the queries
+                if profile not in profiles:
+                    profiles.append(profile)
+            context["profiles"] = profiles
+        else:
+            context["profiles"] = Profile.objects.none()
+
+        return context

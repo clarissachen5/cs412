@@ -1,0 +1,59 @@
+<!-- File: mini_insta/search_results.html
+Author: Clarissa Chen (clchen5@bu.edu), 9/26/2025
+Description: Displays information for results from the user's search -->
+
+
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>
+    Search Results
+</h1>
+
+<main class="grid-container">
+    {% for profile in profiles %} <!--use a for to display all of the profiles-->
+    <profile>
+        <div>
+            <h2>{{profile.username}}</h2>
+            <h3>{{profile.display_name}}</h3>
+            <a href="{% url 'show_profile' profile.pk %}">
+                <img src="{{profile.profile_image_url}}" alt="">
+            </a>
+            </div>
+    </profile>
+    {% endfor %}
+</main>
+
+
+{% for post in posts %} <!--use a for to display all of the profiles-->
+
+    <div>
+        <h2>{{post.profile.username}}</h2>
+        <a href="{% url 'show_profile' post.profile.pk %}">
+            <img src="{{post.profile_image_url}}" alt="">
+        </a>
+        </div>
+
+
+    <div id="show_post">
+    
+        <div>
+            {% with photo=post.get_all_photos|first %}
+            <!-- ensures only the first photo is show for the post -->
+                <a href="{% url 'show_post' post.pk %}"><img src="{{photo.get_image_url}}" alt=""></a>
+    
+            {% endwith %}
+            
+        </div>
+
+        <h2>Likes: {{post.get_likes}} </h2>
+        <h2>{{post.caption}}</h2>
+        <h3>{{post.timestamp}}</h3>
+        {% for comment in post.get_all_comments %}
+            <h4>{{comment.profile.username}}: {{comment.text}}</h4>
+        {% endfor %}
+    
+    </div>
+
+{% endfor %}
+{% endblock %} <!-- page specific content ends here -->

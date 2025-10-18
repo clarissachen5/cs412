@@ -27,4 +27,5 @@ urlpatterns = [
         name="following",
     ),
     path("profile/<int:pk>/feed", PostFeedListView.as_view(), name="feed"),
+    path("profile/<int:pk>/search", SearchView.as_view(), name="search"),
 ]

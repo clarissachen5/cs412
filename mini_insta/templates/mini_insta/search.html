@@ -1,0 +1,21 @@
+<!-- File: mini_insta/search.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/17/2025
+Description: Displays information for a user to enter a search -->
+
+
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>
+    Search
+</h1>
+
+<form action="{% url 'search' pk=profile.pk %}" method="get">
+        {% csrf_token %}
+        Search for text, tags, or people:
+        <textarea name="query"></textarea>
+        <button type="submit">Search</button>   
+</form>
+
+
+{% endblock %} <!-- page specific content ends here -->

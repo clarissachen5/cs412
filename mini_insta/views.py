@@ -244,7 +244,9 @@ class SearchView(ListView):
     def dispatch(self, request, *args, **kwargs):
         """Dispatches any request."""
         self.profile = Profile.objects.get(pk=self.kwargs["pk"])
-        self.query = request.GET.get("query", "")
+        self.query = request.GET.get(
+            "query", ""
+        )  # if query doesn't exist, set self.query to ""
         if self.query == "":
             return render(request, "mini_insta/search.html", {"profile": self.profile})
         else:

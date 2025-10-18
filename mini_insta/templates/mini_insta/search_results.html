@@ -25,7 +25,7 @@ Description: Displays information for results from the user's search -->
 </main>
 
 
-{% for post in posts %} <!--use a for to display all of the profiles-->
+{% for post in posts %} <!--use a for to display all of the posts-->
 
     <div>
         <h2>{{post.profile.username}}</h2>
@@ -39,7 +39,7 @@ Description: Displays information for results from the user's search -->
     
         <div>
             {% with photo=post.get_all_photos|first %}
-            <!-- ensures only the first photo is show for the post -->
+            <!-- ensures only the first photo is shown for the post -->
                 <a href="{% url 'show_post' post.pk %}"><img src="{{photo.get_image_url}}" alt=""></a>
     
             {% endwith %}

@@ -10,7 +10,7 @@ Description: Displays information for a Profile's feed of Posts -->
     {{profile.username}}'s Feed
 </h1>
 
-    {% for post in posts %} <!--use a for to display all of the profiles-->
+    {% for post in posts %} <!--use a for to display all of the posts-->
 
         <div>
             <h2>{{post.profile.username}}</h2>
@@ -24,7 +24,7 @@ Description: Displays information for a Profile's feed of Posts -->
         
             <div>
                 {% with photo=post.get_all_photos|first %}
-                <!-- ensures only the first photo is show for the post -->
+                <!-- ensures only the first photo is shown for the post -->
                     <a href="{% url 'show_post' post.pk %}"><img src="{{photo.get_image_url}}" alt=""></a>
         
                 {% endwith %}
@@ -35,7 +35,7 @@ Description: Displays information for a Profile's feed of Posts -->
         
             <h2>{{post.caption}}</h2>
             <h3>{{post.timestamp}}</h3>
-            {% for comment in post.get_all_comments %}
+            {% for comment in post.get_all_comments %} <!-- use a for to display all comments for the post -->
                 <h4>{{comment.profile.username}}: {{comment.text}}</h4>
             {% endfor %}
             

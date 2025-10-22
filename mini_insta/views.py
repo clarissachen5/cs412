@@ -17,6 +17,9 @@ from .models import Profile, Post, Photo, Follow
 from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm, CreatePhotoForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class ProfileListView(ListView):
@@ -43,13 +46,18 @@ class PostDetailView(DetailView):
     context_object_name = "post"
 
 
-class CreatePostView(CreateView):
+class CreatePostView(LoginRequiredMixin, CreateView):
     """A view to handle creation of a new Post.
     (1) display the HTML form to user (GET)
     (2) process the form submission and store the new Post object (POST)"""
 
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login")
 
     def get_context_data(self, **kwargs):
         """Return the primary key of the Profile making the post."""
@@ -91,27 +99,42 @@ class CreatePostView(CreateView):
         return response
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     """View class to handle update of a Profile based on its PK."""
 
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
 
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
 
-class UpdatePostView(UpdateView):
+        return reverse("login")
+
+
+class UpdatePostView(LoginRequiredMixin, UpdateView):
     """View class to handle update of a Post based on its PK."""
 
     model = Post
     form_class = UpdatePostForm
     template_name = "mini_insta/update_post_form.html"
 
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
 
-class DeletePostView(DeleteView):
+        return reverse("login")
+
+
+class DeletePostView(LoginRequiredMixin, DeleteView):
     """View class to delete a Post from a Profile."""
 
     model = Post
     template_name = "mini_insta/delete_post_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login")
 
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
@@ -132,11 +155,16 @@ class DeletePostView(DeleteView):
         return reverse("show_profile", kwargs={"pk": profile.pk})
 
 
-class DeletePhotoView(DeleteView):
+class DeletePhotoView(LoginRequiredMixin, DeleteView):
     """View class to delete a Photo from a Post."""
 
     model = Photo
     template_name = "mini_insta/delete_photo_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login")
 
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
@@ -157,13 +185,18 @@ class DeletePhotoView(DeleteView):
         return reverse("show_post", kwargs={"pk": post.pk})
 
 
-class CreatePhotoView(CreateView):
+class CreatePhotoView(LoginRequiredMixin, CreateView):
     """A view to handle creation of new Photos.
     (1) display the HTML form to user (GET)
     (2) process the form submission and store the new Photo objects (POST)"""
 
     form_class = CreatePhotoForm
     template_name = "mini_insta/create_photo_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login")
 
     def get_context_data(self, **kwargs):
         """Return the primary key of the Profile making the post."""
@@ -216,12 +249,17 @@ class ShowFollowingDetailView(DetailView):
     context_object_name = "profile"
 
 
-class PostFeedListView(ListView):
+class PostFeedListView(LoginRequiredMixin, ListView):
     """Define a view class to show the Post feed for a Profile"""
 
     model = Post
     template_name = "mini_insta/show_feed.html"
     context_object_name = "posts"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login")
 
     def get_context_data(self, **kwargs):
         """Return the primary key of the Profile for this PostFeed."""
@@ -234,12 +272,17 @@ class PostFeedListView(ListView):
         return context
 
 
-class SearchView(ListView):
+class SearchView(LoginRequiredMixin, ListView):
     """Define a view class for search."""
 
     model = Post
     template_name = "mini_insta/search_results.html"
     context_object_name = "posts"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login")
 
     def dispatch(self, request, *args, **kwargs):
         """Dispatches any request."""

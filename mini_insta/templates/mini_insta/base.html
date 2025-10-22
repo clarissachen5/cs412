@@ -13,7 +13,24 @@ Description: Creates base template for all pages in mini_insta app -->
     <body>
         <head>
             <h1>Fruits & Veg Insta</h1>
+
+            {% if request.user.is_authenticated %} 
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <li><input type="submit" value="Logout"></li>
+            </form>
+
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            
+            {% if request.user.is_authenticated %}
+            Logged in as: {{request.user}}
+            {% else %}
+            Not logged in
+            {% endif %}
         </head>
+
 
         <!-- put page specific content here -->
          {% block content %}

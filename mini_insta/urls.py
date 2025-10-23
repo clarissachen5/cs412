@@ -11,6 +11,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path("", ProfileListView.as_view(), name="show_all_profiles"),
     path("profile/<int:pk>", ProfileDetailView.as_view(), name="show_profile"),
+    path("profile", ProfileDetailView.as_view(), name="show_logged_in_profile"),
     path("post/<int:pk>", PostDetailView.as_view(), name="show_post"),
     path("profile/create_post", CreatePostView.as_view(), name="create_post"),
     path("profile/update", UpdateProfileView.as_view(), name="update_profile"),
@@ -33,11 +34,11 @@ urlpatterns = [
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="mini_insta/login.html"),
-        name="login",
+        name="login_page",
     ),
     path(
         "logout/",
         auth_views.LogoutView.as_view(next_page="show_all_profiles"),
-        name="logout",
+        name="logout_page",
     ),
 ]

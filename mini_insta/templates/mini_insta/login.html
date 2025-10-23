@@ -10,7 +10,7 @@ Description: Displays information for a user to login -->
     Login to Mini Insta
 </h1>
 
-<form action="{% url 'login' %}" method="POST">
+<form action="{% url 'login_page' %}" method="POST">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Login">  
@@ -18,7 +18,7 @@ Description: Displays information for a user to login -->
         {% if request.GET.next %}
         <input type="hidden" name="next" value="{{request.GET.next}}">
         {% else %}
-        <input type="hidden" name="next" value="{% url 'show_all_profiles'}">
+        <input type="hidden" name="next" value="{% url 'show_logged_in_profile' %}">
         {% endif %}
 </form>
 

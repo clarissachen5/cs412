@@ -37,6 +37,19 @@ class ProfileDetailView(DetailView):
     template_name = "mini_insta/show_profile.html"
     context_object_name = "profile"
 
+    def get_object(self):
+        """Return the Profile object of the Profile"""
+
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            profile = Profile.objects.get(user=user)
+            return profile
+
+        else:
+            if "pk" in self.kwargs:
+                profile = Profile.objects.get(pk=self.kwargs["pk"])
+                return profile
+
 
 class PostDetailView(DetailView):
     """Define a view class to show one post"""

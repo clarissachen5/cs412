@@ -59,10 +59,17 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
         return reverse("login")
 
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        user = self.request.user
+
+        profile = Profile.objects.get(user=user)
+        return profile
+
     def get_context_data(self, **kwargs):
         """Return the primary key of the Profile making the post."""
         context = super().get_context_data(**kwargs)
-        profile = Profile.objects.get(pk=self.kwargs["pk"])
+        profile = self.get_object()
         context["profile"] = profile
         return context
 
@@ -105,6 +112,15 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
+
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        print("user", self.request.user)
+        user = self.request.user
+
+        profile = Profile.objects.get(user=user)
+        print("profile", profile)
+        return profile
 
     def get_login_url(self):
         """Return the URL for this app's login page."""
@@ -261,10 +277,19 @@ class PostFeedListView(LoginRequiredMixin, ListView):
 
         return reverse("login")
 
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        user = self.request.user
+
+        profile = Profile.objects.get(
+            user=user
+        )  # needs to be get to return one profile. filter returns a QuerySet
+        return profile
+
     def get_context_data(self, **kwargs):
         """Return the primary key of the Profile for this PostFeed."""
         context = super().get_context_data(**kwargs)
-        profile = Profile.objects.get(pk=self.kwargs["pk"])
+        profile = self.get_object()
         context["profile"] = profile
 
         post_feed = profile.get_post_feed()
@@ -279,6 +304,13 @@ class SearchView(LoginRequiredMixin, ListView):
     template_name = "mini_insta/search_results.html"
     context_object_name = "posts"
 
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        user = self.request.user
+
+        profile = Profile.objects.get(user=user)
+        return profile
+
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
@@ -286,7 +318,7 @@ class SearchView(LoginRequiredMixin, ListView):
 
     def dispatch(self, request, *args, **kwargs):
         """Dispatches any request."""
-        self.profile = Profile.objects.get(pk=self.kwargs["pk"])
+        self.profile = self.get_object()
         self.query = request.GET.get(
             "query", ""
         )  # if query doesn't exist, set self.query to ""
@@ -328,4 +360,3 @@ class SearchView(LoginRequiredMixin, ListView):
             context["profiles"] = Profile.objects.none()
 
         return context
-

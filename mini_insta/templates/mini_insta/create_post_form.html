@@ -9,7 +9,7 @@ Description: Displays information for creating a Post on mini_insta -->
 {% block content %} <!-- page specific content starts here -->
 <h1>Create a Post</h1>
 <div class="create">
-    <form action="{% url 'create_post' pk=profile.pk %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url 'create_post' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}  <!-- Displays form values like caption -->
         Select Photos: <input type="file" name="files" multiple>

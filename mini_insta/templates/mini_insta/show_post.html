@@ -15,9 +15,12 @@ Description: Displays information for one mini_insta Post -->
         <!-- show all photos for the post -->
             <div>
                 <img src="{{ photo.get_image_url }}" alt="Some photo">
-                <a href="{% url 'delete_photo' photo.pk %}">
-                    <button type="button">Delete Photo</button>
-                </a>
+
+                {% if request.user.is_authenticated and photo.post.profile.user_id == request.user.id %}
+                    <a href="{% url 'delete_photo' photo.pk %}">
+                        <button type="button">Delete Photo</button>
+                    </a>
+                {% endif %}
             </div> 
             
         {% endfor %}
@@ -30,6 +33,7 @@ Description: Displays information for one mini_insta Post -->
         {% endfor %}
         
         <div>
+            {% if request.user.is_authenticated and post.profile.user_id == request.user.id %}
             <a href="{% url 'delete_post' post.pk %}">
                 <button type="button">Delete</button>
             </a>
@@ -41,6 +45,7 @@ Description: Displays information for one mini_insta Post -->
              <a href="{% url 'create_photo' post.pk %}">
                 <button type="button">Add Photos</button>
             </a>
+            {% endif %}
         </div>
 
     </div>

@@ -23,9 +23,11 @@ Description: Displays information for one mini_insta profile -->
         
         <h3>Joined on {{profile.join_date}}</h3>
         <div class="buttons">
-            <a href="{% url 'update_profile' profile.pk %}">
-                        <button type="button">Update Profile</button>
-                    </a>
+            {% if request.user.is_authenticated and profile.user_id == request.user.id %}
+                <a href="{% url 'update_profile' profile.pk %}">
+                    <button type="button">Update Profile</button>
+                </a>
+            {% endif %}
         </div>
        
         <div class="large">

@@ -328,3 +328,4 @@ class SearchView(LoginRequiredMixin, ListView):
             context["profiles"] = Profile.objects.none()
 
         return context
+

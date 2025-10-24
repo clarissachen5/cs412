@@ -44,13 +44,14 @@ Description: Creates base template for all pages in mini_insta app -->
                     {% if profile %}
                     <!-- if profile is passed as a context variable,6 show link -->
                         {% if request.user.is_authenticated and profile.user_id == request.user.id %}
-                        <li><a href="{% url 'feed' %}">Home</a></li>
+                      
                         <li><a href="{% url 'create_post' %}">Create a Post</a></li>
-                        <li><a href="{% url 'show_logged_in_profile' %}">My Profile</a></li>
                         {% endif %}
 
                         {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'feed' %}">Home</a></li>
                             <li><a href="{% url 'search' %}">Search</a></li>
+                            <li><a href="{% url 'show_logged_in_profile' %}">My Profile</a></li>
                         {% endif %}
                     {% endif %}
 

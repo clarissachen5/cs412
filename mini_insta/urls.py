@@ -47,4 +47,6 @@ urlpatterns = [
         name="logout_confirmation",
     ),
     path("create_profile", CreateProfileView.as_view(), name="create_profile"),
+    path("profile/<int:pk>/follow", FollowProfileView.as_view(), name="follow_profile"),
+    path("post/<int:pk>/like", LikePostView.as_view(), name="like_post"),
 ]

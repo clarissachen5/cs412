@@ -31,6 +31,11 @@ Description: Displays information for a Profile's feed of Posts -->
                 
             </div>
 
+            {% if request.user.is_authenticated and post.profile.user_id != request.user.id %}
+                <a href="{% url 'like_post' pk=post.pk %}">
+                    <button type="button">Like</button>
+                </a>
+            {% endif %}
             <h2>Likes: {{post.get_likes}} </h2>
         
             <h2>{{post.caption}}</h2>

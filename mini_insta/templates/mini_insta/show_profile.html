@@ -28,6 +28,12 @@ Description: Displays information for one mini_insta profile -->
                     <button type="button">Update Profile</button>
                 </a>
             {% endif %}
+
+            {% if request.user.is_authenticated and profile.user_id != request.user.id %}
+                <a href="{% url 'follow_profile' pk=profile.pk %}">
+                    <button type="button">Follow</button>
+                </a>
+            {% endif %}
         </div>
        
         <div class="large">

@@ -3,7 +3,7 @@
 # Description: Configures views specific to mini_insta app.
 
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views.generic import (
@@ -14,7 +14,7 @@ from django.views.generic import (
     DeleteView,
     TemplateView,
 )
-from .models import Profile, Post, Photo, Follow
+from .models import Profile, Post, Photo, Follow, Like
 from .forms import (
     CreatePostForm,
     UpdateProfileForm,
@@ -438,3 +438,73 @@ class CreateProfileView(CreateView):
         response = super().form_valid(form)
 
         return response
+
+
+class FollowProfileView(LoginRequiredMixin, TemplateView):
+    """Define a class for following another Profile."""
+
+    def dispatch(self, request, *args, **kwargs):
+        """Dispatches any request."""
+
+        loggedInProfile = self.get_object()
+
+        otherProfile = Profile.objects.get(pk=self.kwargs["pk"])
+
+        if loggedInProfile != otherProfile:
+
+            alreadyFollowing = Follow.objects.filter(
+                profile=otherProfile, follower_profile=loggedInProfile
+            ).exists()
+            if not alreadyFollowing:
+                Follow.objects.create(
+                    profile=otherProfile, follower_profile=loggedInProfile
+                )
+        nextURL = request.GET.get("next") or reverse(
+            "show_profile", args=[otherProfile.pk]
+        )
+        return redirect(nextURL)
+
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        user = self.request.user
+
+        profile = Profile.objects.get(user=user)
+        return profile
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+
+class LikePostView(LoginRequiredMixin, TemplateView):
+    """Define a class for liking a Post."""
+
+    def dispatch(self, request, *args, **kwargs):
+        """Dispatches any request."""
+
+        loggedInProfile = self.get_object()
+
+        post = Post.objects.get(pk=self.kwargs["pk"])
+
+        if loggedInProfile != post.profile:
+
+            alreadyLiked = Like.objects.filter(
+                profile=loggedInProfile, post=post
+            ).exists()
+            if not alreadyLiked:
+                Like.objects.create(profile=loggedInProfile, post=post)
+        nextURL = request.GET.get("next") or reverse("feed")
+        return redirect(nextURL)
+
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        user = self.request.user
+
+        profile = Profile.objects.get(user=user)
+        return profile
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")

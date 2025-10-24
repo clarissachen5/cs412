@@ -48,6 +48,21 @@ class ProfileDetailView(DetailView):
     def get_object(self):
         """Return the Profile object of the Profile"""
 
+        if "pk" in self.kwargs:
+            profile = Profile.objects.get(pk=self.kwargs["pk"])
+            return profile
+
+
+class LoggedInProfileDetailView(DetailView):
+    """Define a view class to show one profile when logged in"""
+
+    model = Profile
+    template_name = "mini_insta/show_profile.html"
+    context_object_name = "profile"
+
+    def get_object(self):
+        """Return the Profile object of the Profile"""
+
         if self.request.user.is_authenticated:
             user = self.request.user
             profile = Profile.objects.get(user=user)

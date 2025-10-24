@@ -38,7 +38,12 @@ urlpatterns = [
     ),
     path(
         "logout/",
-        auth_views.LogoutView.as_view(next_page="show_all_profiles"),
+        auth_views.LogoutView.as_view(next_page="logout_confirmation"),
         name="logout_page",
+    ),
+    path(
+        "logout/confirmation/",
+        LogoutConfirmationView.as_view(),
+        name="logout_confirmation",
     ),
 ]

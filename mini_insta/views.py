@@ -12,6 +12,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DeleteView,
+    TemplateView,
 )
 from .models import Profile, Post, Photo, Follow
 from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm, CreatePhotoForm
@@ -373,3 +374,9 @@ class SearchView(LoginRequiredMixin, ListView):
             context["profiles"] = Profile.objects.none()
 
         return context
+
+
+class LogoutConfirmationView(TemplateView):
+    """Define a class for the Logout Confirmation."""
+
+    template_name = "mini_insta/logged_out.html"

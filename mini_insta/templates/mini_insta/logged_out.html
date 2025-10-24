@@ -1,0 +1,16 @@
+<!-- File: mini_insta/login.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/23/2025
+Description: Displays information to confirm User logged out -->
+
+
+{% extends 'mini_insta/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>
+    Logout Confirmed
+</h1>
+
+ <li><a href="{% url 'login_page' %}">Login</a></li>
+
+
+{% endblock %} <!-- page specific content ends here -->

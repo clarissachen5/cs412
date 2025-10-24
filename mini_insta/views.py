@@ -138,7 +138,7 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
-        return reverse("login")
+        return reverse("login_page")
 
 
 class UpdatePostView(LoginRequiredMixin, UpdateView):
@@ -151,7 +151,7 @@ class UpdatePostView(LoginRequiredMixin, UpdateView):
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
-        return reverse("login")
+        return reverse("login_page")
 
 
 class DeletePostView(LoginRequiredMixin, DeleteView):
@@ -163,7 +163,7 @@ class DeletePostView(LoginRequiredMixin, DeleteView):
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
-        return reverse("login")
+        return reverse("login_page")
 
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
@@ -193,7 +193,7 @@ class DeletePhotoView(LoginRequiredMixin, DeleteView):
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
-        return reverse("login")
+        return reverse("login_page")
 
     def get_context_data(self, **kwargs):
         """Return the dictionary of context variables for use in the template."""
@@ -225,7 +225,7 @@ class CreatePhotoView(LoginRequiredMixin, CreateView):
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
-        return reverse("login")
+        return reverse("login_page")
 
     def get_context_data(self, **kwargs):
         """Return the primary key of the Profile making the post."""
@@ -288,7 +288,7 @@ class PostFeedListView(LoginRequiredMixin, ListView):
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
-        return reverse("login")
+        return reverse("login_page")
 
     def get_object(self):
         """Return the Profile corresponding to the User."""
@@ -327,7 +327,7 @@ class SearchView(LoginRequiredMixin, ListView):
     def get_login_url(self):
         """Return the URL for this app's login page."""
 
-        return reverse("login")
+        return reverse("login_page")
 
     def dispatch(self, request, *args, **kwargs):
         """Dispatches any request."""

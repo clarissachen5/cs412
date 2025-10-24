@@ -15,12 +15,19 @@ from django.views.generic import (
     TemplateView,
 )
 from .models import Profile, Post, Photo, Follow
-from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm, CreatePhotoForm
+from .forms import (
+    CreatePostForm,
+    UpdateProfileForm,
+    UpdatePostForm,
+    CreatePhotoForm,
+    CreateProfileForm,
+)
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 
 class ProfileListView(ListView):
@@ -380,3 +387,39 @@ class LogoutConfirmationView(TemplateView):
     """Define a class for the Logout Confirmation."""
 
     template_name = "mini_insta/logged_out.html"
+
+
+class CreateProfileView(CreateView):
+    """Define a class for creating a new Profile."""
+
+    template_name = "mini_insta/create_profile_form.html"
+    form_class = CreateProfileForm
+    model = Profile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_form"] = UserCreationForm()
+        return context
+
+    def get_absolute_url(self):
+        """Redirects to profile once made successfully."""
+        return reverse("show_logged_in_profile")
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new Profile object to the Django database."""
+
+        user_form = UserCreationForm(self.request.POST)
+
+        if not user_form.is_valid():
+            context = self.get_context_data(form=form)
+            context["user_form"] = user_form
+            return self.render_to_response(context)
+        user = user_form.save()
+
+        login(self.request, user, backend="django.contrib.auth.backends.ModelBackend")
+
+        form.instance.user = user
+
+        response = super().form_valid(form)
+
+        return response

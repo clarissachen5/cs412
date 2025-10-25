@@ -580,7 +580,11 @@ class DeleteLikeView(LoginRequiredMixin, DeleteView):
         post = Post.objects.get(pk=self.kwargs["pk"])
         Like.objects.filter(profile=loggedInProfile, post=post).delete()
 
-        next_url = request.GET.get("next") or reverse("feed")
+        next_url = (
+            request.GET.get("next")
+            or reverse("feed")
+            or reverse("show_post", args=[self.kwargs["pk"]])
+        )
         return redirect(next_url)
 
     def get_login_url(self):

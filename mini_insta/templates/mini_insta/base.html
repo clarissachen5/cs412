@@ -49,11 +49,12 @@ Description: Creates base template for all pages in mini_insta app -->
                         <li><a href="{% url 'create_post' %}">Create a Post</a></li>
                         {% endif %}
 
-                        {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'feed' %}">Home</a></li>
-                            <li><a href="{% url 'search' %}">Search</a></li>
-                            <li><a href="{% url 'show_logged_in_profile' %}">My Profile</a></li>
-                        {% endif %}
+                        
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'feed' %}">Home</a></li>
+                        <li><a href="{% url 'search' %}">Search</a></li>
+                        <li><a href="{% url 'show_logged_in_profile' %}">My Profile</a></li>
                     {% endif %}
 
                     

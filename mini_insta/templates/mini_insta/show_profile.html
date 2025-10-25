@@ -30,9 +30,16 @@ Description: Displays information for one mini_insta profile -->
             {% endif %}
 
             {% if request.user.is_authenticated and profile.user_id != request.user.id %}
+
+                {% if is_followed %}
+                <a href="{% url 'delete_follow' pk=profile.pk %}">
+                    <button type="button">Unfollow</button>
+                </a>
+                {% else %}
                 <a href="{% url 'follow_profile' pk=profile.pk %}">
                     <button type="button">Follow</button>
                 </a>
+                {% endif %}
             {% endif %}
         </div>
        

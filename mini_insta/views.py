@@ -52,6 +52,19 @@ class ProfileDetailView(DetailView):
             profile = Profile.objects.get(pk=self.kwargs["pk"])
             return profile
 
+    def get_context_data(self, **kwargs):
+        """Provides info on what profiles are following this profile."""
+        context = super().get_context_data(**kwargs)
+
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            loggedInProfile = Profile.objects.get(user=user)
+            otherProfile = Profile.objects.get(pk=self.kwargs["pk"])
+            context["is_followed"] = Follow.objects.filter(
+                profile=otherProfile, follower_profile=loggedInProfile
+            ).exists()
+        return context
+
 
 class LoggedInProfileDetailView(DetailView):
     """Define a view class to show one profile when logged in"""
@@ -508,3 +521,38 @@ class LikePostView(LoginRequiredMixin, TemplateView):
         """Return the URL for this app's login page."""
 
         return reverse("login_page")
+
+
+class DeleteFollowView(LoginRequiredMixin, DeleteView):
+    """View class to delete a Follow for a Profile."""
+
+    def dispatch(self, request, *args, **kwargs):
+        loggedInProfile = self.get_object()
+        otherProfile = Profile.objects.get(pk=self.kwargs["pk"])
+        Follow.objects.filter(
+            profile=otherProfile, follower_profile=loggedInProfile
+        ).delete()
+
+        next_url = request.GET.get("next") or reverse(
+            "show_profile", args=[otherProfile.pk]
+        )
+        return redirect(next_url)
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        user = self.request.user
+
+        profile = Profile.objects.get(user=user)
+        return profile
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful delete."""
+        pk = self.kwargs["pk"]
+        profile = Profile.objects.get(pk=pk)
+
+        return reverse("show_profile", kwargs={"pk": profile.pk})

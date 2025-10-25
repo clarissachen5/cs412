@@ -114,7 +114,7 @@ class Post(models.Model):
         return comments
 
     def get_likes(self):
-        """Return a QuerySet of Likes for this Post."""
+        """Return a count of Likes for this Post."""
 
         likes = Like.objects.filter(post=self)
 
@@ -125,6 +125,17 @@ class Post(models.Model):
             count += 1
 
         return count
+
+    def get_like_set(self):
+        """Return a list of Profiles that like this Post."""
+        likes = Like.objects.filter(post=self)
+
+        likeProfiles = []
+
+        for like in likes:
+            likeProfiles.append(like.profile)
+
+        return likeProfiles
 
 
 class Photo(models.Model):

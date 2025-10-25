@@ -54,5 +54,5 @@ urlpatterns = [
         name="delete_follow",
     ),
     path("post/<int:pk>/like", LikePostView.as_view(), name="like_post"),
-    # path("post/<int:pk>/delete_like", DeleteLikeView.as_view(), name="delete_like"),
+    path("post/<int:pk>/delete_like", DeleteLikeView.as_view(), name="delete_like"),
 ]

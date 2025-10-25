@@ -94,6 +94,20 @@ class PostDetailView(DetailView):
     template_name = "mini_insta/show_post.html"
     context_object_name = "post"
 
+    def get_context_data(self, **kwargs):
+        """Provides info on whether the logged in user liked this Post."""
+        context = super().get_context_data(**kwargs)
+
+        post = Post.objects.get(pk=self.kwargs["pk"])
+        context["post"] = post
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            loggedInProfile = Profile.objects.get(user=user)
+            context["is_liked"] = Like.objects.filter(
+                profile=loggedInProfile, post=post
+            ).exists()
+        return context
+
 
 class CreatePostView(LoginRequiredMixin, CreateView):
     """A view to handle creation of a new Post.
@@ -556,3 +570,32 @@ class DeleteFollowView(LoginRequiredMixin, DeleteView):
         profile = Profile.objects.get(pk=pk)
 
         return reverse("show_profile", kwargs={"pk": profile.pk})
+
+
+class DeleteLikeView(LoginRequiredMixin, DeleteView):
+    """View class to delete a Like for a Profile."""
+
+    def dispatch(self, request, *args, **kwargs):
+        loggedInProfile = self.get_object()
+        post = Post.objects.get(pk=self.kwargs["pk"])
+        Like.objects.filter(profile=loggedInProfile, post=post).delete()
+
+        next_url = request.GET.get("next") or reverse("feed")
+        return redirect(next_url)
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_object(self):
+        """Return the Profile corresponding to the User."""
+        user = self.request.user
+
+        profile = Profile.objects.get(user=user)
+        return profile
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful delete."""
+
+        return reverse("feed")

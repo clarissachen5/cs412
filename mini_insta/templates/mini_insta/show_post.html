@@ -25,11 +25,25 @@ Description: Displays information for one mini_insta Post -->
             
         {% endfor %}
 
-        {% if request.user.is_authenticated and post.profile.user_id != request.user.id %}
+         {% if request.user.is_authenticated and post.profile.user_id != request.user.id %}
+                {% if is_liked %}
+                <a href="{% url 'delete_like' pk=post.pk %}">
+                    <button type="button">Unlike</button>
+                </a>
+                {% else %}
                 <a href="{% url 'like_post' pk=post.pk %}">
                     <button type="button">Like</button>
                 </a>
-        {% endif %}
+                {% endif %}
+            
+            
+            {% endif %}
+
+        <!-- {% if request.user.is_authenticated and post.profile.user_id != request.user.id %}
+                <a href="{% url 'like_post' pk=post.pk %}">
+                    <button type="button">Like</button>
+                </a>
+        {% endif %} -->
         <h2>Liked by {{post.get_likes}} </h2>
         <h2>{{post.caption}}</h2>
         <h3>{{post.timestamp}}</h3>

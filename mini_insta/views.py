@@ -576,7 +576,10 @@ class DeleteLikeView(LoginRequiredMixin, DeleteView):
     """View class to delete a Like for a Profile."""
 
     def dispatch(self, request, *args, **kwargs):
-        loggedInProfile = self.get_object()
+        user = self.request.user
+
+        loggedInProfile = Profile.objects.get(user=user)
+
         post = Post.objects.get(pk=self.kwargs["pk"])
         Like.objects.filter(profile=loggedInProfile, post=post).delete()
 
@@ -591,13 +594,6 @@ class DeleteLikeView(LoginRequiredMixin, DeleteView):
         """Return the URL for this app's login page."""
 
         return reverse("login_page")
-
-    def get_object(self):
-        """Return the Profile corresponding to the User."""
-        user = self.request.user
-
-        profile = Profile.objects.get(user=user)
-        return profile
 
     def get_success_url(self):
         """Return the URL to redirect after a successful delete."""

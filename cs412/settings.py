@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "restaurant",  # installs new restaurant app to cs412 project
     "blog",
     "mini_insta",
+    "marathon_analytics",
 ]
 
 MIDDLEWARE = [

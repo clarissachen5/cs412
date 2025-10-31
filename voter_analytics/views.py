@@ -25,6 +25,11 @@ class VotersListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["years"] = list(range(1920, 2005))
+
+        context["selected_party"] = self.request.GET.get("party_affiliation", "")
+        context["selected_score"] = self.request.GET.get("voter_score", "")
+        context["selected_min_year"] = self.request.GET.get("min_birth_year", "")
+        context["selected_max_year"] = self.request.GET.get("max_birth_year", "")
         return context
 
     def get_queryset(self):
@@ -91,6 +96,12 @@ class GraphListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["years"] = list(range(1920, 2005))
+        context["selected_party"] = self.request.GET.get("party_affiliation", "")
+        context["selected_score"] = self.request.GET.get("voter_score", "")
+        context["selected_min_year"] = self.request.GET.get("min_birth_year", "")
+        context["selected_max_year"] = self.request.GET.get("max_birth_year", "")
+
         voters = context["voters"]
         birth_years = {}
         party_affiliations = {}

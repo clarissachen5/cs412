@@ -8,39 +8,117 @@ Description: Searches for voters that meet the entered criteria in the search. -
     <form action="{% if 'graphs' in request.path %}
                     {% url 'graphs' %}
                     {% else %}
-               {% url 'voters_list' %}
+                    {% url 'voters_list' %}
                {% endif %}" method="get">
         <table>
         <tr>
             <label for="party_affiliation">Select Party Affiliation:</label>
             <select id="party_affiliation" name="party_affiliation">
             <option value="">Choose</option>
-            <option value="U ">U </option>
-            <option value="D ">D </option>
-            <option value="R ">R </option>
-            <option value="J ">J </option>
-            <option value="A ">A </option>
-            <option value="CC">CC</option>
-            <option value="X ">X </option>
-            <option value="L ">L </option>
-            <option value="Q ">Q </option>
-            <option value="S ">S </option>
-            <option value="FF">FF</option>
-            <option value="G ">G </option>
-            <option value="HH">HH</option>
-            <option value="T ">T </option>
-            <option value="AA">AA</option>
-            <option value="GG">GG</option>
-            <option value="Z ">Z </option>
-            <option value="O ">O </option>
-            <option value="P ">P </option>
-            <option value="E ">E </option>
-            <option value="V ">V </option>
-            <option value="H ">H </option>
-            <option value="Y ">Y </option>
-            <option value="W ">W </option>
-            <option value="EE">EE</option>
-            <option value="K ">K </option>
+            <option value="U " 
+            {% if selected_party == "U " %}
+            selected
+            {% endif %}>U </option>
+            <option value="D "
+            {% if selected_party == "D " %}
+            selected
+            {% endif %}>D </option>
+            <option value="R "
+            {% if selected_party == "R " %}
+            selected
+            {% endif %}>R </option>
+            <option value="J "
+            {% if selected_party == "J " %}
+            selected
+            {% endif %}>J </option>
+            <option value="A "
+            {% if selected_party == "A " %}
+            selected
+            {% endif %}>A </option>
+            <option value="CC"
+            {% if selected_party == "CC" %}
+            selected
+            {% endif %}>CC</option>
+            <option value="X "
+            {% if selected_party == "X " %}
+            selected
+            {% endif %}>X </option>
+            <option value="L "
+            {% if selected_party == "L " %}
+            selected
+            {% endif %}>L </option>
+            <option value="Q "
+            {% if selected_party == "Q " %}
+            selected
+            {% endif %}>Q </option>
+            <option value="S "
+            {% if selected_party == "S " %}
+            selected
+            {% endif %}>S </option>
+            <option value="FF"
+            {% if selected_party == "FF" %}
+            selected
+            {% endif %}>FF</option>
+            <option value="G "
+            {% if selected_party == "G " %}
+            selected
+            {% endif %}>G </option>
+            <option value="HH"
+            {% if selected_party == "HH" %}
+            selected
+            {% endif %}>HH</option>
+            <option value="T "
+            {% if selected_party == "T " %}
+            selected
+            {% endif %}>T </option>
+            <option value="AA"
+            {% if selected_party == "AA" %}
+            selected
+            {% endif %}>AA</option>
+            <option value="GG"
+            {% if selected_party == "GG" %}
+            selected
+            {% endif %}>GG</option>
+            <option value="Z "
+            {% if selected_party == "Z " %}
+            selected
+            {% endif %}>Z </option>
+            <option value="O "
+            {% if selected_party == "O " %}
+            selected
+            {% endif %}>O </option>
+            <option value="P "
+            {% if selected_party == "P " %}
+            selected
+            {% endif %}>P </option>
+            <option value="E "
+            {% if selected_party == "E " %}
+            selected
+            {% endif %}>E </option>
+            <option value="V "
+            {% if selected_party == "V " %}
+            selected
+            {% endif %}>V </option>
+            <option value="H "
+            {% if selected_party == "H " %}
+            selected
+            {% endif %}>H </option>
+            <option value="Y "
+            {% if selected_party == "Y " %}
+            selected
+            {% endif %}>Y </option>
+            <option value="W "
+            {% if selected_party == "W " %}
+            selected
+            {% endif %}>W </option>
+            <option value="EE"
+            {% if selected_party == "EE" %}
+            selected
+            {% endif %}>EE</option>
+            <option value="K "
+            {% if selected_party == "K " %}
+            selected
+            {% endif %}>K </option>
             </select>
         </tr>
            
@@ -48,12 +126,12 @@ Description: Searches for voters that meet the entered criteria in the search. -
             <label for="voter_score">Select Voter Score:</label>
             <select id="voter_score" name="voter_score">
                 <option value="">Choose</option>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
-                <option value="0">0</option>
+                <option value="5" {% if selected_score == "5" %}selected{% endif %}>5</option>
+                <option value="4" {% if selected_score == "4" %}selected{% endif %}>4</option>
+                <option value="3" {% if selected_score == "3" %}selected{% endif %}>3</option>
+                <option value="2" {% if selected_score == "2" %}selected{% endif %}>2</option>
+                <option value="1" {% if selected_score == "1" %}selected{% endif %}>1</option>
+                <option value="0" {% if selected_score == "0" %}selected{% endif %}>0</option>
             </select>
         </tr>
 
@@ -62,7 +140,7 @@ Description: Searches for voters that meet the entered criteria in the search. -
             <select id="min_birth_year" name="min_birth_year">
                 <option value="">Choose</option>
                 {% for i in years %}
-                    <option value="{{i}}">{{i}}</option>
+                    <option value="{{i}}" {% if selected_min_year == i|stringformat:"s" %}selected{% endif %}>{{i}}</option>
                 {% endfor %}
             </select>
         </tr>
@@ -72,7 +150,7 @@ Description: Searches for voters that meet the entered criteria in the search. -
             <select id="max_birth_year" name="max_birth_year">
                 <option value="">Choose</option>
                 {% for i in years %}
-                    <option value="{{i}}">{{i}}</option>
+                    <option value="{{i}}"  {% if selected_max_year == i|stringformat:"s" %}selected{% endif %}>{{i}}</option>
                 {% endfor %}
             </select>
         </tr>

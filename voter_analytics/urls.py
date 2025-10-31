@@ -9,4 +9,6 @@ from . import views
 # URL patterns specific to the mini_insta app:
 urlpatterns = [
     path("", views.VotersListView.as_view(), name="voters"),
+    path("voters", views.VotersListView.as_view(), name="voters_list"),
+    path(r"voters/<int:pk>", views.VoterDetailView.as_view(), name="voter_detail"),
 ]

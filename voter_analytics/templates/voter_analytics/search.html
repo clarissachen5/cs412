@@ -1,0 +1,81 @@
+<!-- File: voter_analytics/search.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/31/2025
+Description: Searches for voters that meet the entered criteria in the search. -->
+
+<h1>Search Form</h1>
+
+
+    <form action="{% url 'voters_list' %}" method="get">
+        <table>
+        <tr>
+            <label for="party_affiliation">Select Party Affiliation:</label>
+            <select id="party_affiliation" name="party_affiliation">
+            <option value="">Choose</option>
+            <option value="U ">U </option>
+            <option value="D ">D </option>
+            <option value="R ">R </option>
+            <option value="J ">J </option>
+            <option value="A ">A </option>
+            <option value="CC">CC</option>
+            <option value="X ">X </option>
+            <option value="L ">L </option>
+            <option value="Q ">Q </option>
+            <option value="S ">S </option>
+            <option value="FF">FF</option>
+            <option value="G ">G </option>
+            <option value="HH">HH</option>
+            <option value="T ">T </option>
+            <option value="AA">AA</option>
+            <option value="GG">GG</option>
+            <option value="Z ">Z </option>
+            <option value="O ">O </option>
+            <option value="P ">P </option>
+            <option value="E ">E </option>
+            <option value="V ">V </option>
+            <option value="H ">H </option>
+            <option value="Y ">Y </option>
+            <option value="W ">W </option>
+            <option value="EE">EE</option>
+            <option value="K ">K </option>
+            </select>
+        </tr>
+           
+        <tr>
+            <label for="voter_score">Select Voter Score:</label>
+            <select id="voter_score" name="voter_score">
+                <option value="">Choose</option>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+                <option value="0">0</option>
+            </select>
+        </tr>
+
+        <tr>
+            <label for="min_birth_year">Min Year of Birth:</label>
+            <select id="min_birth_year" name="min_birth_year">
+                <option value="">Choose</option>
+                {% for i in years %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+        </tr>
+
+        <tr>
+            <label for="max_birth_year">Max Year of Birth:</label>
+            <select id="max_birth_year" name="max_birth_year">
+                <option value="">Choose</option>
+                {% for i in years %}
+                    <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select>
+        </tr>
+
+        <tr>
+            <td><input type="submit"></td>
+        </tr>
+        </table>
+    </form>
+

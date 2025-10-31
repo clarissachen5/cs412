@@ -58,7 +58,7 @@ class Result(models.Model):
 
 
 def load_data():
-    """Function to load data records from CSV file intot he Django database."""
+    """Function to load data records from CSV file into the Django database."""
     Result.objects.all().delete()
     filename = "/Users/clarissachen/Desktop/2023_chicago_results.csv"
     f = open(filename, "r")  # open the file for reading
@@ -100,4 +100,4 @@ def load_data():
 
         except:
             print("Something went wrong")
-            print("line={line}")
+            print(f"line={line}")

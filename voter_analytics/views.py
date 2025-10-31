@@ -65,7 +65,7 @@ class VotersListView(ListView):
         if len(filters) > 0:
             query = filters[0]
             for i in range(1, len(filters)):
-                query |= filters[i]
+                query &= filters[i]
             voters = Voter.objects.filter(query)
 
         return voters
@@ -208,7 +208,7 @@ class GraphListView(ListView):
         if len(filters) > 0:
             query = filters[0]
             for i in range(1, len(filters)):
-                query |= filters[i]
+                query &= filters[i]
             voters = Voter.objects.filter(query)
 
         return voters

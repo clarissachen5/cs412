@@ -5,7 +5,11 @@ Description: Searches for voters that meet the entered criteria in the search. -
 <h1>Search Form</h1>
 
 
-    <form action="{% url 'voters_list' %}" method="get">
+    <form action="{% if 'graphs' in request.path %}
+                    {% url 'graphs' %}
+                    {% else %}
+               {% url 'voters_list' %}
+               {% endif %}" method="get">
         <table>
         <tr>
             <label for="party_affiliation">Select Party Affiliation:</label>

@@ -1,0 +1,41 @@
+<!-- File: voter_analytics/graphs.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/31/2025
+Description: Displays graphs for data on voters.-->
+
+
+
+{% extends 'voter_analytics/base.html' %}
+ 
+ 
+{% block content %}
+<div class="container">
+	<h1>Voters</h1>
+    <div class="row">
+        {% include "voter_analytics/search.html" %}
+    </div>
+
+    <!-- show the birth year bar chart here: -->
+    <div class="container">
+        <div class="row">
+            {{graph_birth_years|safe}}
+        </div>
+    </div>
+
+     <!-- show the pie chart here: -->
+    <div class="container">
+        <div class="row">
+            {{graph_pie|safe}}
+        </div>
+    </div>
+
+     <!-- show the elections bar chart here: -->
+    <div class="container">
+        <div class="row">
+            {{graph_elections|safe}}
+        </div>
+    </div>
+        
+    
+</div>
+  
+{% endblock %}

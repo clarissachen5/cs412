@@ -1,0 +1,65 @@
+<!-- File: voter_analytics/voters.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/30/2025
+Description: Displays information for all voters -->
+
+
+{% extends 'voter_analytics/base.html' %}
+ 
+ 
+{% block content %}
+<div class="container">
+	<h1>Voters</h1>
+
+     <!-- navigation links for different pages of results -->
+    <div class="row">
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Street Address</th>
+                <th>Date of Birth</th>
+                <th>Party Affiliation</th>
+                <th>Voter Score</th>
+            </tr>
+    
+            {% for voter in voters %}
+            <tr>
+                
+                <td>{{voter.first_name}}</td>
+                <td>{{voter.last_name}}</td>
+                <td>{{voter.res_add_street_num}} {{voter.res_add_street_name}}, {{res_add_apt_num}}, {{res_add_zip_code}}</td>
+                <td>{{voter.date_of_birth}}</td>
+                <td>{{voter.party_affiliation}}</td>
+                <td>{{voter.voter_score}}</td>
+               
+            </tr>
+            {% endfor %}
+    
+        </table>
+ 
+        </div>
+        
+    </div>
+  
+{% endblock %}

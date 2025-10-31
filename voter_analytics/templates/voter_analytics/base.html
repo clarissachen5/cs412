@@ -1,0 +1,26 @@
+<!-- File: voter_analytics/base.html
+Author: Clarissa Chen (clchen5@bu.edu), 10/30/2025
+Description: Creates base template for all pages in voter_analytics app -->
+
+{% load static %}
+
+<html>
+    <head>
+        <title>Voter Analytics</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Voter Analytics</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'voters' %}">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

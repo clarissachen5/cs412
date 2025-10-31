@@ -30,6 +30,7 @@ class Voter(models.Model):
     v21primary = models.BooleanField(default=False)
     v22general = models.BooleanField(default=False)
     v23town = models.BooleanField(default=False)
+    voter_score = models.TextField(blank=True)
 
     def __str__(self):
         """Return a string representation of this model instance."""
@@ -63,6 +64,7 @@ def load_data():
                 v21primary=True if fields[13] == "TRUE" else False,
                 v22general=True if fields[14] == "TRUE" else False,
                 v23town=True if fields[15] == "TRUE" else False,
+                voter_score=fields[16],
             )
             voter.save()  # commit this voter to the database
             print(f"Created voter: {voter}")

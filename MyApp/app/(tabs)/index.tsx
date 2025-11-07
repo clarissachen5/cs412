@@ -1,31 +1,21 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Image} from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
+import { styles } from '../../assets/my_styles';
 
-export default function TabOneScreen() {
+const profileImg = require("../../assets/images/linkedin profile copy.jpeg");
+
+
+export default function IndexScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
+      <Text style={styles.title}>Clarissa Chen</Text>
+            <Text style={styles.subText}>Risk-taking community builder who executes</Text>
+       <Image source={profileImg} style={{ width: 300, height: 300 }} />
+
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      {/* <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

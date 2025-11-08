@@ -12,7 +12,16 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   subText: {
-    fontSize: 16
+    fontSize: 16,
+    textAlign: "center",
+    padding: 20,
+    
+  },
+  citiesText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: "center",
+    padding: 20,
   },
   separator: {
     marginVertical: 30,

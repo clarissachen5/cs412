@@ -1,3 +1,7 @@
+// File: MyApp/assets/my_styles.ts
+// Author: Clarissa Chen (clchen5@bu.edu), 11/7/2025
+// Description: Specifies styling for MyApp
+
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({

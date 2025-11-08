@@ -1,3 +1,7 @@
+// File: MyApp/app/(tabs)/about.tsx
+// Author: Clarissa Chen (clchen5@bu.edu), 11/7/2025
+// Description: Displays the about page
+
 import { Text, View } from '@/components/Themed';
 import { styles } from '../../assets/my_styles';
 import { Image} from 'react-native';

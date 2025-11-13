@@ -1,0 +1,23 @@
+<!-- File: dadjokes/base.html
+Author: Clarissa Chen (clchen5@bu.edu), 11/13/2025
+Description: Creates base template for all pages in dadjokes app -->
+
+
+{% load static %}
+<html>
+    <head>
+        <title>dad jokes</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+
+        <nav>
+            <!-- <li><a href="{% url 'home_page' %}">Home</a></li>
+            <li><a href="{% url 'about_page' %}">About</a></li> -->
+        </nav>
+        <!-- put page specific content here -->
+         {% block content %}
+         {% endblock %}
+        
+    </body>
+</html>

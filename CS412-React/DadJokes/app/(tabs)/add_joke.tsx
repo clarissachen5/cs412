@@ -14,9 +14,10 @@ export default function AddJokeScreen() {
     
 
     const addJoke = async () => {
+        console.log("Submit pressed with:", { jokeText, jokeName });
         setIsPosting(true)
         try {
-            const response = await fetch("http://127.0.0.1:8000/dadjokes/api/jokes", {
+            const response = await fetch("https://cs-webapps.bu.edu/clchen5/dadjokes/api/jokes", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -27,8 +28,14 @@ export default function AddJokeScreen() {
                 })
             })
             const newJoke = await response.json();
-            console.log("response", response)
+            console.log("response status", response.status)
             console.log("newJoke", newJoke)
+
+            if (!response.ok) {
+                console.log("Server rejected POST");
+                setError("Failed to add new joke");
+                return;
+            }
             setJokeText("");
             setJokeName("");
             setIsPosting(false);

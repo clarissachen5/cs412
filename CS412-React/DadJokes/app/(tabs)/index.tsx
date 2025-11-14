@@ -11,14 +11,14 @@ export default function IndexScreen() {
   const [contributor, setContributor] = useState("")
   const fetchData = async () => {
     const jokeResponse = await fetch(
-      `http://127.0.0.1:8000/dadjokes/api/random`
+      `https://cs-webapps.bu.edu/clchen5/dadjokes/api/random`
     );
     const jokeData = await jokeResponse.json()
     setJoke(jokeData.text)
     setContributor(jokeData.name)
 
     const pictureResponse = await fetch(
-      `http://127.0.0.1:8000/dadjokes/api/random_picture`
+      `https://cs-webapps.bu.edu/clchen5/dadjokes/api/random_picture`
     );
     const pictureData = await pictureResponse.json()
     setPicture(pictureData.image_url)

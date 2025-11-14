@@ -13,14 +13,29 @@ export default function JokesListScreen() {
   }
   const [jokes, setJokes] = useState<Joke[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
   const fetchData = async () => {
-    const response = await fetch(
-       `http://127.0.0.1:8000/dadjokes/api/jokes`
-    );
-    const data = await response.json()
-    console.log('API data:', data); 
-    setJokes(data.results)
+
+    let url: string | null = 'https://cs-webapps.bu.edu/clchen5/dadjokes/api/jokes';
+    const allJokes: Joke[] = [];
+
+    while (url) {
+      const response: Response = await fetch(url);
+      const data = await response.json();
+
+      console.log('API page data:', data);
+      allJokes.push(...data.results); //ensures all jokes are shown and none hide due to pagination
+
+      url = data.next; 
+    }
+    setJokes(allJokes)
+  }
+
+  const handleRefresh = () => {
+    setRefreshing(true)
+    fetchData()
+    setRefreshing(false)
   }
 
   useEffect(() => {
@@ -31,14 +46,25 @@ export default function JokesListScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Jokes List</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-       
 
-      {jokes.map((joke, index) => (
-        <View key={index} style={{ marginBottom: 16 }}>
-          <Text>{joke.text}</Text>
-          <Text>{joke.name}</Text>
-        </View>
-      ))}
+       <FlatList data={jokes} renderItem={({ item }) => {
+          return (
+            <View>
+              <Text >{item.text}</Text>
+              <Text >{item.name}</Text>
+            </View>
+          )
+        }} 
+
+        ItemSeparatorComponent={() => (
+          <View style={{height: 16, }} />
+        )}
+        ListEmptyComponent={<Text>No Jokes Found</Text>}
+        ListHeaderComponent={<Text >Joke List</Text>}
+        ListFooterComponent={<Text >End of list</Text>}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        />
     
     </View>
 

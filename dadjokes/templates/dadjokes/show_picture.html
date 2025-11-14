@@ -1,11 +1,12 @@
-<!-- File: dadjokes/show_joke.html
+<!-- File: dadjokes/show_picture.html
 Author: Clarissa Chen (clchen5@bu.edu), 11/14/2025
-Description: Displays information for one dadjokes Joke -->
+Description: Displays information for one dadjokes Picture -->
 
 {% extends 'dadjokes/base.html' %} <!-- uses base template -->
 
 {% block content %} <!-- page specific content starts here -->
-    <h1>{{joke.text}}</h1>
+
+<img src="{{ picture.image_url }}" alt="Some photo">
     
     
 {% endblock %} <!-- page specific content ends here -->

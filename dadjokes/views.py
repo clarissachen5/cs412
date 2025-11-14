@@ -46,7 +46,7 @@ class JokeTemplateView(TemplateView):
 
 def randomJoke(request):
     """Displays a random joke and picture"""
-    template_name = "dadjokes/show_joke.html"
+    template_name = "dadjokes/show_random_joke.html"
 
     joke = Joke.objects.order_by(
         "?"
@@ -58,3 +58,49 @@ def randomJoke(request):
         "picture": picture,
     }
     return render(request, template_name=template_name, context=context)
+
+
+class JokesListView(ListView):
+    """Define a view class to show all Jokes."""
+
+    model = Joke
+    template_name = "dadjokes/show_all_jokes.html"
+    context_object_name = "jokes"
+
+
+class JokeDetailView(DetailView):
+    """Define a view class to show one Joke."""
+
+    model = Joke
+    template_name = "dadjokes/show_joke.html"
+    context_object_name = "joke"
+
+    def get_object(self):
+        """Return the Joke object of the Joke."""
+
+        if "pk" in self.kwargs:
+            joke = Joke.objects.get(pk=self.kwargs["pk"])
+            return joke
+
+
+class PictureListView(ListView):
+    """Define a view class to show all Pictures."""
+
+    model = Picture
+    template_name = "dadjokes/show_all_pictures.html"
+    context_object_name = "pictures"
+
+
+class PictureDetailView(DetailView):
+    """Define a view class to show one Picture."""
+
+    model = Picture
+    template_name = "dadjokes/show_picture.html"
+    context_object_name = "picture"
+
+    def get_object(self):
+        """Return the Picture object of the Picture."""
+
+        if "pk" in self.kwargs:
+            picture = Picture.objects.get(pk=self.kwargs["pk"])
+            return picture

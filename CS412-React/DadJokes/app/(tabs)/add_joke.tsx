@@ -1,16 +1,68 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ActivityIndicator, TextInput, Button } from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
+import { useState, useEffect } from "react";
 
 export default function AddJokeScreen() {
+
+    const [jokeText, setJokeText] = useState("")
+    const [jokeName, setJokeName] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
+    const [isPosting, setIsPosting] = useState(false)
+    const [error, setError] = useState("")
+    
+
+    const addJoke = async () => {
+        setIsPosting(true)
+        try {
+            const response = await fetch("http://127.0.0.1:8000/dadjokes/api/jokes", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    text: jokeText,
+                    name: jokeName
+                })
+            })
+            const newJoke = await response.json();
+            console.log("response", response)
+            console.log("newJoke", newJoke)
+            setJokeText("");
+            setJokeName("");
+            setIsPosting(false);
+            setError("");
+        } catch (error) {
+            console.error("Error adding new joke", error)
+            setError("Failed to add new joke")
+        }
+
+    }
+    
+    // if (isLoading) {
+    //     return(
+    //       <View>
+    //         <ActivityIndicator size="large" color="0000ff" />
+    //         <Text>Loading...</Text>
+    //       </View>
+    //     )
+    //   }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add Joke</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+
+      <TextInput placeholder="Joke Text" value={jokeText} onChangeText={setJokeText} />
+      <TextInput placeholder="Joke Contributor Name" value={jokeName} onChangeText={setJokeName} />
+      <Button title={isPosting ? "Adding...": "Add Joke"}
+      onPress={addJoke}
+      disabled={isPosting}/>
+
+
     </View>
   );
+
 }
 
 const styles = StyleSheet.create({

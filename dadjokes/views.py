@@ -3,7 +3,11 @@
 # Description: Configures views specific to dadjokes app.
 
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from rest_framework import generics
+from .serializers import *
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 # Create your views here.
 from django.views.generic import (
@@ -104,3 +108,53 @@ class PictureDetailView(DetailView):
         if "pk" in self.kwargs:
             picture = Picture.objects.get(pk=self.kwargs["pk"])
             return picture
+
+
+class JokeListAPIView(generics.ListCreateAPIView):
+    """An API view to return a listing of Jokes and to create a Joke."""
+
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+
+
+class JokeDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """An API view to return one Joke."""
+
+    queryset = Joke.objects.all()
+    serializer_class = JokeSerializer
+
+
+class RandomJokeAPIView(APIView):
+    """An API view to return one random Joke"""
+
+    def get(self, request, *args, **kwargs):
+        """gets a random Joke"""
+        jokes = Joke.objects.all()
+        joke = random.choice(jokes)
+        serializer = JokeSerializer(joke)
+        return Response(serializer.data)
+
+
+class PictureListAPIView(generics.ListCreateAPIView):
+    """An API view to return a listing of Pictures and to create a Picture."""
+
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer
+
+
+class PictureDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """An API view to return one Picture."""
+
+    queryset = Picture.objects.all()
+    serializer_class = PictureSerializer
+
+
+class RandomPictureAPIView(APIView):
+    """An API view to return one random Picture"""
+
+    def get(self, request, *args, **kwargs):
+        """gets a random Picture"""
+        pictures = Picture.objects.all()
+        picture = random.choice(pictures)
+        serializer = PictureSerializer(picture)
+        return Response(serializer.data)

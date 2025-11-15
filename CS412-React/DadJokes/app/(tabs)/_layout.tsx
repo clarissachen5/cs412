@@ -1,3 +1,7 @@
+// File: DadJokes/app/(tabs)/_layout.tsx
+// Author: Clarissa Chen (clchen5@bu.edu), 11/14/2025
+// Description: Creates the screens and tab bar
+
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';

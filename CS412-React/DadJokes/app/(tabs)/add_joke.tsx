@@ -1,8 +1,13 @@
+// File: DadJokes/app/(tabs)/add_joke.tsx
+// Author: Clarissa Chen (clchen5@bu.edu), 11/14/2025
+// Description: Displays the add_joke page
+
 import { StyleSheet, ActivityIndicator, TextInput, Button } from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import { Text, View } from '@/components/Themed';
 import { useState, useEffect } from "react";
+import { styles } from '../../assets/my_styles';
 
 export default function AddJokeScreen() {
 
@@ -47,44 +52,27 @@ export default function AddJokeScreen() {
 
     }
     
-    // if (isLoading) {
-    //     return(
-    //       <View>
-    //         <ActivityIndicator size="large" color="0000ff" />
-    //         <Text>Loading...</Text>
-    //       </View>
-    //     )
-    //   }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Add Joke</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
-      <TextInput placeholder="Joke Text" value={jokeText} onChangeText={setJokeText} />
-      <TextInput placeholder="Joke Contributor Name" value={jokeName} onChangeText={setJokeName} />
-      <Button title={isPosting ? "Adding...": "Add Joke"}
-      onPress={addJoke}
-      disabled={isPosting}/>
+        {error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : (<>
+       <View style={styles.inputContainer}>
+        <TextInput style={styles.input} placeholder="Joke Text" value={jokeText} onChangeText={setJokeText} />
+        <TextInput style={styles.input} placeholder="Joke Contributor Name" value={jokeName} onChangeText={setJokeName} />
+        <Button title={isPosting ? "Adding...": "Add Joke"}
+        onPress={addJoke}
+        disabled={isPosting}/>
+      </View>
 
-
+        </>)}
     </View>
   );
 
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

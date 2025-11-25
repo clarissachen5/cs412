@@ -1,0 +1,28 @@
+<!-- File: project/show_all_meal_ideas.html 
+Author: Clarissa Chen (clchen5@bu.edu), 11/25/2025
+Description: Displays information for all project meal ideas -->
+
+
+{% extends 'project/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>
+    All Meal Ideas
+</h1>
+
+<main class="grid-container">
+    {% for meal_idea in meal_ideas %} <!--use a for to display all of the meal ideas-->
+    <profile>
+        <div>
+            <h2>{{meal_idea.name}}</h2>
+            <h3>{{meal_idea.ingredients}}</h3>
+            
+            <img src="{{meal_idea.get_image_url}}" alt="">
+            <a href="{{meal_idea.link}}">Link to Recipe</a>
+            <h3>Created by {{meal_idea.creator.name}} </h3>
+            
+            </div>
+    </profile>
+    {% endfor %}
+</main>
+{% endblock %} <!-- page specific content ends here -->

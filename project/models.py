@@ -76,8 +76,19 @@ class MealIngredient(models.Model):
 class MealPlan(models.Model):
     """Encapsulate the data of a MealPlan by a user"""
 
+    name = models.TextField(blank=True)
+
+    def __str__(self):
+        """Return a string representaion of this model instance."""
+        return f"meal plan name: {self.name}"
+
+
+class MealPlanEntry(models.Model):
+    """Encapsulate the data of a MealPlanEntry for a MealPlan."""
+
+    meal_plan = models.ForeignKey(MealPlan, on_delete=models.CASCADE)
     meal_idea = models.ForeignKey(MealIdea, on_delete=models.CASCADE)
 
     def __str__(self):
         """Return a string representaion of this model instance."""
-        return f"meal_idea: {self.meal_idea}"
+        return f"meal plan name: {self.meal_plan} meal_idea: {self.meal_idea}"

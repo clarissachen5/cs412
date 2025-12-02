@@ -18,27 +18,15 @@ Description: Creates base template for all pages in project app -->
          {% endblock %}
         <!-- end page specific content -->
 
-        <!-- <nav>
-                <ul>
-                    <li><a href="{% url 'show_all_profiles'%}">Show All Profiles</a></li>
-                    
-                    {% if profile %}
-                    <!-- if profile is passed as a context variable,6 show link -->
-                        {% if request.user.is_authenticated and profile.user_id == request.user.id %}
-                      
-                        <li><a href="{% url 'create_post' %}">Create a Post</a></li>
-                        {% endif %}
+    <nav>
+            <ul>
+                <li><a href="{% url 'show_all_meal_plans'%}">My Meal Plans</a></li>
+                <li><a href="{% url 'show_all_meal_ideas'%}">All Meal Ideas</a></li>
+                
+                
 
-                        
-                    {% endif %}
-                    {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'feed' %}">Home</a></li>
-                        <li><a href="{% url 'search' %}">Search</a></li>
-                        <li><a href="{% url 'show_logged_in_profile' %}">My Profile</a></li>
-                    {% endif %}
-
-                    
-                </ul>
-            </nav> -->
+                
+            </ul>
+        </nav>
     </body>
 </html>

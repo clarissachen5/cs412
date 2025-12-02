@@ -19,7 +19,7 @@ Description: Displays information for all project meal ideas -->
             
             <img src="{{meal_idea.get_image_url}}" alt="">
             <a href="{{meal_idea.link}}">Link to Recipe</a>
-            <h3>Created by {{meal_idea.creator.name}} </h3>
+            <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
             
             </div>
     </profile>

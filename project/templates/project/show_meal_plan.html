@@ -1,0 +1,30 @@
+<!-- File: project/show_meal_plan.html
+Author: Clarissa Chen (clchen5@bu.edu), 12/2/2025
+Description: Displays information for one project meal plan -->
+
+{% extends 'project/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>{{meal_plan.name}}</h1>
+    
+    <profile_page>  
+        <main class="grid-container">
+            
+            {% for meal in meal_entries %}
+            <!-- show all meals for the meal plan -->
+                <div>
+                    <h2>{{meal.meal_idea.name}}</h2>
+                    <h3>{{meal.meal_idea.ingredients}}</h3>
+                    <img src="{{meal.meal_idea.get_image_url}}" alt="">
+                    <a href="{{meal.meal_idea.link}}">Link to Recipe</a>
+                    <h3>Created by {{meal.meal_idea.creator.first_name}} {{meal.meal_idea.creator.last_name}}</h3>
+
+                    
+                </div>
+            {% endfor %}
+        </main>
+    </profile_page>
+
+    
+
+{% endblock %} <!-- page specific content ends here -->

@@ -7,14 +7,14 @@ Description: Displays information for all project meal plans -->
 
 {% block content %} <!-- page specific content starts here -->
 <h1>
-    Your Meal Plans
+    My Meal Plans
 </h1>
 
 <main class="grid-container">
     {% for meal_plan in meal_plans %} <!--use a for to display all of the meal plans-->
     <profile>
         <div>
-            <h2>{{meal_plan.name}}</h2>
+            <a href="{% url 'show_meal_plan' meal_plan.pk %}"><h2>{{meal_plan.name}}</h2></a>
         </div>
     </profile>
     {% endfor %}

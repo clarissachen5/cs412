@@ -11,4 +11,5 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path("", MealIdeaListView.as_view(), name="show_all_meal_ideas"),
     path("mealplans", MealPlanListView.as_view(), name="show_all_meal_plans"),
+    path("mealplan/<int:pk>", MealPlanDetailView.as_view(), name="show_meal_plan"),
 ]

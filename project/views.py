@@ -65,6 +65,27 @@ class MealPlanDetailView(DetailView):
         return context
 
 
+class IngredientListView(ListView):
+    """'Define a view class to show all ingredients"""
+
+    model = Ingredient
+    template_name = "project/show_all_ingredients.html"
+    context_object_name = "ingredients"
+
+
+class GroceryList(DetailView):
+    """Define a view class to show the ingredients lists for a meal plan"""
+
+    model = MealPlan
+    template_name = "project/grocery_list.html"
+    context_object_name = "meal_plan"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+    """add context for grocery ingredients lists by store from the meal plan """
+
+
 class CreateMealPlanEntryView(CreateView):
     """A view to handle the creation of a meal entry, aka adding a meal idea to a meal plan."""
 

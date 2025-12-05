@@ -83,6 +83,25 @@ class GroceryList(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        mealPlan = MealPlan.objects.get(pk=self.kwargs["pk"])
+        mealPlanEntries = MealPlanEntry.objects.filter(meal_plan=mealPlan)
+
+        context["meal_entries"] = mealPlanEntries
+        mealPlanIngredients = []
+        for entry in mealPlanEntries:
+            ingredients = entry.meal_idea.ingredients.split(",")
+            for i in ingredients:
+                if i not in mealPlanIngredients:
+                    mealPlanIngredients.append(i)
+        
+        ingredientsDB = Ingredient.objects.all()
+        for m in mealPlanIngredients:
+            if i in ingredientsDB:
+                # this is wrong m is a string, i is an ingredient object, fix
+
+
+
+
     """add context for grocery ingredients lists by store from the meal plan """
 
 

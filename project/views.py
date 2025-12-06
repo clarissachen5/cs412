@@ -97,14 +97,19 @@ class GroceryList(DetailView):
                 store = Store.objects.get(pk=ingredient.store.pk)
 
                 if store.name in storeLists:
-                    if ingredient.name in storeLists[ingredient.store]:
+                    if ingredient.name in storeLists[store.name]:
                         storeLists[store.name][ingredient.name][1] += i.quantity
                     else:
-                        storeLists[store.name] = {}
                         storeLists[store.name][ingredient.name] = [
                             ingredient.unit,
                             i.quantity,
                         ]
+                else:
+                    storeLists[store.name] = {}
+                    storeLists[store.name][ingredient.name] = [
+                        ingredient.unit,
+                        i.quantity,
+                    ]
 
         context["storeLists"] = storeLists
         return context

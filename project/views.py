@@ -24,7 +24,7 @@ from .models import (
     MealPlanEntry,
 )
 
-from .forms import CreateMealPlanEntryForm
+from .forms import CreateMealPlanEntryForm, CreateMealIdeaForm
 
 from django.urls import reverse
 
@@ -133,3 +133,27 @@ class CreateMealPlanEntryView(CreateView):
         """Provide a URL to redirect to after creating a new meal plan entry."""
 
         return reverse("show_all_meal_ideas")
+
+
+class CreateMealIdeaView(CreateView):
+    """A view to handle the creation of a meal idea.
+    (1) display the HTML form to user (GET)
+    (2) process the form submission and store the new Post object (POST)"""
+
+    form_class = CreateMealIdeaForm
+    template_name = "project/create_meal_idea_form.html"
+
+    def get_success_url(self):
+        """Provide a URL to redirect to after creating a new Meal Idea."""
+        return reverse("show_all_meal_ideas")
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new object to the Django database."""
+
+        print(form.cleaned_data)
+
+        meal_idea = form.save()
+        # saves the meal idea
+        response = super().form_valid(form)
+
+        return response

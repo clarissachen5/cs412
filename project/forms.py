@@ -10,8 +10,17 @@ class CreateMealPlanEntryForm(forms.ModelForm):
     """A form to add a meal plan entry to the database."""
 
     class Meta:
-        """Associate this form with a the Post model from our database."""
+        """Associate this form with the Post model from our database."""
 
         model = MealPlanEntry
         fields = ["meal_plan"]
 
+
+class CreateMealIdeaForm(forms.ModelForm):
+    """A form to add a meal idea to the database."""
+
+    class Meta:
+        """'Associate this form with the Meal Idea model from our database."""
+
+        model = MealIdea
+        fields = ["name", "ingredients", "link", "image"]

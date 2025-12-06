@@ -1,0 +1,24 @@
+<!-- File: project/create_meal_idea_form.html
+Author: Clarissa Chen (clchen5@bu.edu), 12/6/2025
+Description: Displays information for creating a meal idea -->
+
+
+
+{% extends 'project/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>Create a Meal Idea</h1>
+<div class="create">
+    <form action="{% url 'create_meal_idea' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}  <!-- Displays form values  -->
+        <input type="submit" name="submit" value="Submit">
+
+        <a href="{% url 'show_all_meal_ideas' %}">
+             <button type="button">Cancel</button>
+        </a>
+    
+    </form>
+</div>
+
+{% endblock %} <!-- page specific content ends here -->

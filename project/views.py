@@ -87,22 +87,35 @@ class GroceryList(DetailView):
         mealPlanEntries = MealPlanEntry.objects.filter(meal_plan=mealPlan)
 
         context["meal_entries"] = mealPlanEntries
-        mealPlanIngredients = []
+        storeLists = {}
         for entry in mealPlanEntries:
-            ingredients = entry.meal_idea.ingredients.split(",")
-            for i in ingredients:
-                if i not in mealPlanIngredients:
-                    mealPlanIngredients.append(i)
-        
-        ingredientsDB = Ingredient.objects.all()
-        for m in mealPlanIngredients:
-            if i in ingredientsDB:
-                # this is wrong m is a string, i is an ingredient object, fix
+            meal_ingredients = MealIngredient.objects.filter(
+                meal_idea=entry.meal_idea
+            )  # gets the meal ingredients for the MealPlanEntry's meal_idea
+            for i in meal_ingredients:
+                ingredient = Ingredient.objects.get(pk=i.ingredient.pk)
+                store = Store.objects.get(pk=ingredient.store.pk)
+
+                if store.name in storeLists:
+                    if ingredient.name in storeLists[ingredient.store]:
+                        storeLists[store.name][ingredient.name][1] += i.quantity
+                    else:
+                        storeLists[store.name] = {}
+                        storeLists[store.name][ingredient.name] = [
+                            ingredient.unit,
+                            i.quantity,
+                        ]
+
+        context["storeLists"] = storeLists
+        return context
+
+        # if ingredient.name in mealPlanIngredients:
+        #     mealPlanIngredients[ingredient.name][2] += i.quantity
+        # else:
+        #     mealPlanIngredients[ingredient.name] = [ingredient.unit, ingredient.store, i.quantity]
 
 
-
-
-    """add context for grocery ingredients lists by store from the meal plan """
+# """add context for grocery ingredients lists by store from the meal plan """
 
 
 class CreateMealPlanEntryView(CreateView):

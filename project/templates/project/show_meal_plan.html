@@ -22,6 +22,9 @@ Description: Displays information for one project meal plan -->
                     
                 </div>
             {% endfor %}
+
+            <li><a href="{% url 'show_grocery_lists' meal_plan.pk %}">Grocery Lists</a></li>
+                
         </main>
     </profile_page>
 

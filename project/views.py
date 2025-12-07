@@ -151,6 +151,8 @@ class CreateMealIdeaView(CreateView):
         """This method handles the form submission and saves the new object to the Django database."""
 
         print(form.cleaned_data)
+        creator = Creator.objects.get(pk=1)  # placeholder for now
+        form.instance.creator = creator
 
         meal_idea = form.save()
         # saves the meal idea

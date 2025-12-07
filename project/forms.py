@@ -24,3 +24,13 @@ class CreateMealIdeaForm(forms.ModelForm):
 
         model = MealIdea
         fields = ["name", "ingredients", "link", "image"]
+
+
+class CreateCreatorForm(forms.ModelForm):
+    """A form to handle creating a new Creator."""
+
+    class Meta:
+        """Associate this form with the Creator model in our database."""
+
+        model = Creator
+        fields = ["last_name", "first_name", "email"]

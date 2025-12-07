@@ -4,6 +4,8 @@
 
 
 from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 
@@ -14,10 +16,15 @@ class Creator(models.Model):
     last_name = models.TextField(blank=True)
     first_name = models.TextField(blank=True)
     email = models.TextField(blank=True)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """Return a string representation of this model instance."""
         return f"last_name: {self.last_name}, first_name: {self.first_name}, email: {self.email}"
+
+    def get_absolute_url(self):
+        """Display all meal ideas for creator"""
+        return reverse("show_creator_meal_ideas", kwargs={"pk": self.pk})
 
 
 class Store(models.Model):

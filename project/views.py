@@ -24,9 +24,13 @@ from .models import (
     MealPlanEntry,
 )
 
-from .forms import CreateMealPlanEntryForm, CreateMealIdeaForm
+from .forms import CreateMealPlanEntryForm, CreateMealIdeaForm, CreateCreatorForm
 
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 
 class MealIdeaListView(ListView):
@@ -35,6 +39,22 @@ class MealIdeaListView(ListView):
     model = MealIdea
     template_name = "project/show_all_meal_ideas.html"
     context_object_name = "meal_ideas"
+
+
+class CreatorDetailView(DetailView):
+    """Define a view class to show the meal ideas for one Creator."""
+
+    model = Creator
+    template_name = "project/show_creator_meal_ideas.html"
+    context_object_name = "creator"
+
+    def get_context_data(self, **kwargs):
+        """Provides the meal ideas for the Creator"""
+        context = super().get_context_data(**kwargs)
+
+        mealIdeas = MealIdea.objects.filter(Creator=self.kwargs["pk"])
+        context["mealIdeas"] = mealIdeas
+        return context
 
 
 class MealPlanListView(ListView):
@@ -158,4 +178,46 @@ class CreateMealIdeaView(CreateView):
         # saves the meal idea
         response = super().form_valid(form)
 
+        return response
+
+
+class LogoutConfirmationView(TemplateView):
+    """Define a class for the Logout Confirmation."""
+
+    template_name = "project/logged_out.html"
+
+
+class CreateCreatorView(CreateView):
+    """Define a class for creating a new Creator."""
+
+    template_name = "project/create_creator_form.html"
+    form_class = CreateCreatorForm
+    model = Creator
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_form"] = UserCreationForm()
+        return context
+
+    def get_absolute_url(self):
+        """Redirects to show meal ideas once made successfully."""
+
+        return reverse("creator_meal_ideas", kwargs={"pk", self.pk})
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new Creator object to the Django database."""
+
+        user_form = UserCreationForm(self.request.POST)
+
+        if not user_form.is_valid():
+            context = self.get_context_data(form=form)
+            context["user_form"] = user_form
+            return self.render_to_response(context)
+        user = user_form.save()
+
+        login(self.request, user, backend="django.contrib.auth.backends.ModelBackend")
+
+        form.instance.user = user
+
+        response = super().form_valid(form)
         return response

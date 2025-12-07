@@ -1,0 +1,26 @@
+<!-- File: project/login.html
+Author: Clarissa Chen (clchen5@bu.edu), 12/7/2025
+Description: Displays information for a user to login -->
+
+
+{% extends 'project/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>
+    Login to Meal Planner
+</h1>
+
+<form action="{% url 'login_page' %}" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Login">  
+
+        {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% else %}
+        <input type="hidden" name="next" value="{% url 'show_all_meal_ideas' %}">
+        {% endif %}
+</form>
+
+
+{% endblock %} <!-- page specific content ends here -->

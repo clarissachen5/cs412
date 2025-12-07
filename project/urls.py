@@ -15,4 +15,25 @@ urlpatterns = [
     path("ingredients", IngredientListView.as_view(), name="show_all_ingredients"),
     path("grocerylists/<int:pk>", GroceryList.as_view(), name="show_grocery_lists"),
     path("create_meal_idea", CreateMealIdeaView.as_view(), name="create_meal_idea"),
+    path(
+        "login/",
+        auth_views.LoginView.as_view(template_name="project/login.html"),
+        name="login_page",
+    ),
+    path(
+        "logout/",
+        auth_views.LogoutView.as_view(next_page="logout_confirmation"),
+        name="logout_page",
+    ),
+    path(
+        "logout/confirmation/",
+        LogoutConfirmationView.as_view(),
+        name="logout_confirmation",
+    ),
+    path("create_creator", CreateCreatorView.as_view(), name="create_creator"),
+    path(
+        "creator_meal_ideas/<int:pk",
+        CreatorDetailView.as_view(),
+        name="show_creator_meal_ideas",
+    ),
 ]

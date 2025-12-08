@@ -155,13 +155,30 @@ class CreateMealPlanEntryView(CreateView):
         return reverse("show_all_meal_ideas")
 
 
-class CreateMealIdeaView(CreateView):
+class CreateMealIdeaView(LoginRequiredMixin, CreateView):
     """A view to handle the creation of a meal idea.
     (1) display the HTML form to user (GET)
     (2) process the form submission and store the new Post object (POST)"""
 
     form_class = CreateMealIdeaForm
     template_name = "project/create_meal_idea_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_object(self):
+        """Return the Creator corresponding to the User."""
+        user = self.request.user
+        creator = Creator.objects.get(user=user)
+        return creator
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        creator = self.get_object()
+        context["creator"] = creator
+        return context
 
     def get_success_url(self):
         """Provide a URL to redirect to after creating a new Meal Idea."""
@@ -171,7 +188,7 @@ class CreateMealIdeaView(CreateView):
         """This method handles the form submission and saves the new object to the Django database."""
 
         print(form.cleaned_data)
-        creator = Creator.objects.get(pk=1)  # placeholder for now
+        creator = self.get_object()
         form.instance.creator = creator
 
         meal_idea = form.save()

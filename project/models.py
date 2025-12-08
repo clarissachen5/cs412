@@ -16,7 +16,7 @@ class Creator(models.Model):
     last_name = models.TextField(blank=True)
     first_name = models.TextField(blank=True)
     email = models.TextField(blank=True)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         """Return a string representation of this model instance."""

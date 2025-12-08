@@ -52,7 +52,7 @@ class CreatorDetailView(DetailView):
         """Provides the meal ideas for the Creator"""
         context = super().get_context_data(**kwargs)
 
-        mealIdeas = MealIdea.objects.filter(Creator=self.kwargs["pk"])
+        mealIdeas = MealIdea.objects.filter(creator=self.kwargs["pk"])
         context["mealIdeas"] = mealIdeas
         return context
 

@@ -84,6 +84,7 @@ class MealPlan(models.Model):
     """Encapsulate the data of a MealPlan by a user"""
 
     name = models.TextField(blank=True)
+    creator = models.ForeignKey(Creator, on_delete=models.CASCADE)
 
     def __str__(self):
         """Return a string representaion of this model instance."""

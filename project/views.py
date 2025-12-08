@@ -149,10 +149,42 @@ class CreateMealPlanEntryView(CreateView):
     form_class = CreateMealPlanEntryForm
     template_name = "project/create_meal_plan_entry_form.html"
 
+    def get_context_data(self, **kwargs):
+        """Get the meal idea to add to a meal plan."""
+        context = super().get_context_data(**kwargs)
+        meal_idea = MealIdea.objects.get(pk=self.kwargs["pk"])
+        context["meal_idea"] = meal_idea
+
+        meal_plans = MealPlan.objects.all()
+        context["meal_plans"] = meal_plans
+        return context
+
+    def get_object(self):
+        """Return the meal idea for this meal plan entry."""
+        meal_idea = MealIdea.objects.get(pk=self.pk)
+        return meal_idea
+
     def get_success_url(self):
         """Provide a URL to redirect to after creating a new meal plan entry."""
 
         return reverse("show_all_meal_ideas")
+
+    def get_success_url(self):
+        """Provide a URL to redirect to after creating a new Meal Idea."""
+        return reverse("show_all_meal_ideas")
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new object to the Django database."""
+
+        print(form.cleaned_data)
+        meal_idea = self.get_object()
+        form.instance.mealidea = meal_idea
+
+        meal_idea = form.save()
+        # saves the meal idea
+        response = super().form_valid(form)
+
+        return response
 
 
 class CreateMealIdeaView(LoginRequiredMixin, CreateView):

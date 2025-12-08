@@ -36,4 +36,9 @@ urlpatterns = [
         CreatorDetailView.as_view(),
         name="show_creator_meal_ideas",
     ),
+    path(
+        "add_to_meal_plan/<int:pk>",
+        CreateMealPlanEntryView.as_view(),
+        name="add_to_meal_plan",
+    ),
 ]

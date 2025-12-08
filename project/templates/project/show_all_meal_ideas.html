@@ -20,8 +20,10 @@ Description: Displays information for all project meal ideas -->
             <img src="{{meal_idea.get_image_url}}" alt="">
             <a href="{{meal_idea.link}}">Link to Recipe</a>
             <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
-            
-            </div>
+            <a href="{% url 'add_to_meal_plan' meal_idea.pk %}">
+                <button>Add to Meal Plan</button>
+            </a>
+        </div>
     </profile>
     {% endfor %}
 </main>

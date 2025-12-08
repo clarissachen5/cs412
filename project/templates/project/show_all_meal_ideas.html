@@ -17,7 +17,9 @@ Description: Displays information for all project meal ideas -->
             <h2>{{meal_idea.name}}</h2>
             <h3>{{meal_idea.ingredients}}</h3>
             
-            <img src="{{meal_idea.get_image_url}}" alt="">
+            {% if meal_idea.image %}
+                <img src="{{meal_idea.get_image_url}}" alt="">
+            {% endif %}
             <a href="{{meal_idea.link}}">Link to Recipe</a>
             <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
             <a href="{% url 'add_to_meal_plan' meal_idea.pk %}">

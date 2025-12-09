@@ -41,7 +41,7 @@ class MealIdeaListView(ListView):
     context_object_name = "meal_ideas"
 
     def get_image_url(self):
-        '''sets the image url depending on whether an image file exists or not.'''
+        """sets the image url depending on whether an image file exists or not."""
         if self.image:
             return self.image.url
         return ""
@@ -167,30 +167,26 @@ class CreateMealPlanEntryView(CreateView):
 
     def get_object(self):
         """Return the meal idea for this meal plan entry."""
-        meal_idea = MealIdea.objects.get(pk=self.pk)
+        meal_idea = MealIdea.objects.get(pk=self.kwargs["pk"])
         return meal_idea
 
     def get_image_url(self):
-        '''sets the image url depending on whether an image file exists or not.'''
+        """sets the image url depending on whether an image file exists or not."""
         if self.image:
             return self.image.url
         return ""
-    
+
     def get_success_url(self):
         """Provide a URL to redirect to after creating a new meal plan entry."""
 
         return reverse("show_all_meal_ideas")
-
-    # def get_success_url(self):
-    #     """Provide a URL to redirect to after creating a new Meal Idea."""
-    #     return reverse("show_all_meal_ideas")
 
     def form_valid(self, form):
         """This method handles the form submission and saves the new object to the Django database."""
 
         print(form.cleaned_data)
         meal_idea = self.get_object()
-        form.instance.mealidea = meal_idea
+        form.instance.meal_idea = meal_idea
 
         meal_idea = form.save()
         # saves the meal idea

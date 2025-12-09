@@ -16,16 +16,23 @@ Description: Displays information for all project ingredients -->
             <th>Ingredient: </th>
             <th>Unit:</th>
             <th>Store:</th>
+            
         </tr>
         {% for ingredient in ingredients %} <!--use a for to display all of the ingredients-->
         <tr>
             <td>{{ingredient.name}}</td>
             <td>{{ingredient.unit}}</td>
             <td>{{ingredient.store.name}}</td>
+            <td><a href="{% url 'delete_ingredient' ingredient.pk %}">
+        <button>Delete</button> 
+    </a></td>
         </tr>
 
         {% endfor %}
     </table>
     
+    <a href="{% url 'create_ingredient' %}">
+        <button>Add Ingredient</button>
+    </a>
 </main>
 {% endblock %} <!-- page specific content ends here -->

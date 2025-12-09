@@ -30,6 +30,8 @@ from .forms import (
     CreateCreatorForm,
     CreateMealPlanForm,
     UpdateMealIdeaForm,
+    CreateIngredientForm,
+    CreateStoreForm,
 )
 
 from django.urls import reverse
@@ -382,3 +384,38 @@ class UpdateMealIdeaView(LoginRequiredMixin, UpdateView):
         """Return the URL to redirect after a successful update."""
 
         return reverse("show_all_meal_ideas")
+
+
+class CreateIngredientView(CreateView):
+    """Define a class for creating a new Ingredient."""
+
+    template_name = "project/create_ingredient_form.html"
+    form_class = CreateIngredientForm
+    model = Ingredient
+
+    def get_success_url(self):
+        """Redirects to show ingredients once made successfully."""
+
+        return reverse("show_all_ingredients")
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new object to the Django database."""
+
+        print(form.cleaned_data)
+        form.save()
+
+        response = super().form_valid(form)
+
+        return response
+
+
+class DeleteIngredientView(DeleteView):
+    """View class to delete a meal plan and all corresponding MealPlanEntry objects."""
+
+    model = Ingredient
+    template_name = "project/delete_ingredient_form.html"
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful delete."""
+
+        return reverse("show_all_ingredients")

@@ -15,6 +15,7 @@ Description: Displays information for all project meal plans -->
     <profile>
         <div>
             <a href="{% url 'show_meal_plan' meal_plan.pk %}"><h2>{{meal_plan.name}}</h2></a>
+            <h3>Created by {{meal_plan.creator.first_name}} {{meal_plan.creator.last_name}}</h3>
         </div>
     </profile>
     {% endfor %}

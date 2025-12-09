@@ -32,6 +32,7 @@ from .forms import (
     UpdateMealIdeaForm,
     CreateIngredientForm,
     CreateStoreForm,
+    CreateMealIngredientForm,
 )
 
 from django.urls import reverse
@@ -246,8 +247,18 @@ class CreateMealIdeaView(LoginRequiredMixin, CreateView):
         form.instance.creator = creator
 
         meal_idea = form.save()
-        # saves the meal idea
+
+        ingredients = form.instance.ingredients
+        print(ingredients)
+
         response = super().form_valid(form)
+        # ingredientsList = ingredients.split(", ")
+        # print(ingredientsList)
+
+        # for i in ingredientsList:
+        # similar to mini insta adding images to a post, review that
+
+        # saves the meal idea
 
         return response
 
@@ -409,6 +420,30 @@ class CreateIngredientView(CreateView):
         return response
 
 
+class CreateMealIngredientView(CreateView):
+    """Define a class for creating a new MealIngredient."""
+
+    template_name = "project/create_meal_ingredient_form.html"
+    form_class = CreateMealIngredientForm
+    model = MealIngredient
+    context_object_name = "meal_idea"
+
+    def get_success_url(self):
+        """Redirects to show meal ideas once made successfully."""
+
+        return reverse("show_all_meal_ideas")
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new object to the Django database."""
+
+        print(form.cleaned_data)
+        form.save()
+
+        response = super().form_valid(form)
+
+        return response
+
+
 class DeleteIngredientView(DeleteView):
     """View class to delete a meal plan and all corresponding MealPlanEntry objects."""
 
@@ -419,8 +454,6 @@ class DeleteIngredientView(DeleteView):
         """Return the URL to redirect after a successful delete."""
 
         return reverse("show_all_ingredients")
-    
-
 
 
 class CreateStoreView(CreateView):
@@ -444,7 +477,3 @@ class CreateStoreView(CreateView):
         response = super().form_valid(form)
 
         return response
-
-
-
-    

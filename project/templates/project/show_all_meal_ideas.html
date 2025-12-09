@@ -23,9 +23,14 @@ Description: Displays information for all project meal ideas -->
             <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
             <a href="{{meal_idea.link}}"><button>View Recipe</button></a>
             
+            <!-- <a href="{% url 'create_meal_ingredient' meal_idea.pk %}">
+                <button>Add Ingredient</button>
+            </a> -->
             <a href="{% url 'add_to_meal_plan' meal_idea.pk %}">
                 <button>Add to Meal Plan</button>
             </a>
+
+            
 
             {% if request.user.is_authenticated and meal_idea.creator.user == request.user %}
              <a href="{% url 'update_meal_idea' meal_idea.pk %}">

@@ -64,4 +64,9 @@ urlpatterns = [
         UpdateMealIdeaView.as_view(),
         name="update_meal_idea",
     ),
+    path(
+        "create_meal_ingredient/<int:pk>",
+        CreateMealIngredientView.as_view(),
+        name="create_meal_ingredient",
+    ),
 ]

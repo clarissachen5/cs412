@@ -66,6 +66,16 @@ class CreateIngredientForm(forms.ModelForm):
         fields = ["name", "unit", "store"]
 
 
+class CreateMealIngredientForm(forms.ModelForm):
+    """A form to handle creating a new MealIngredient."""
+
+    class Meta:
+        """Associate this form with the Ingredient model in our database."""
+
+        model = MealIngredient
+        fields = ["quantity"]
+
+
 class CreateStoreForm(forms.ModelForm):
     """A form to handle creating a new Store."""
 

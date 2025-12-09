@@ -25,9 +25,12 @@ Description: Displays information for all project meal ideas -->
             <a href="{% url 'add_to_meal_plan' meal_idea.pk %}">
                 <button>Add to Meal Plan</button>
             </a>
+
+            {% if request.user.is_authenticated and meal_idea.creator.user == request.user %}
              <a href="{% url 'update_meal_idea' meal_idea.pk %}">
                 <button>Update Meal Idea</button>
             </a>
+            {% endif %}
         </div>
     </profile>
     {% endfor %}

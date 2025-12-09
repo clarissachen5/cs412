@@ -9,6 +9,9 @@ Description: Displays information for project meal ideas for current creator-->
 <h1>
    Your Meal Ideas
 </h1>
+<div class="center-align">
+    <a href="{% url 'create_meal_idea' %}"><button>Add Meal Idea</button></a>
+</div>
 
 <main class="grid-container">
      <profile>
@@ -33,11 +36,12 @@ Description: Displays information for project meal ideas for current creator-->
                 <a href="{% url 'update_meal_idea' meal_idea.pk %}">
                     <button>Update Meal Idea</button>
                 </a>
-                </div>
+                {% endif %}
+            </div>
 
         {% endfor %}
     </profile>
 </main>
 
-<a href="{% url 'create_meal_idea' %}">Add Meal Idea</a>
+
 {% endblock %} <!-- page specific content ends here -->

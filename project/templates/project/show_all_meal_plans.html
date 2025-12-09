@@ -10,6 +10,11 @@ Description: Displays information for all project meal plans -->
     All Meal Plans
 </h1>
 
+<div class="center-align">
+    <a href="{% url 'create_meal_plan' %}">
+        <button>Create New Meal Plan</button>
+    </a>
+</div>
 <main class="grid-container">
     {% for meal_plan in meal_plans %} <!--use a for to display all of the meal plans-->
     <profile>
@@ -20,7 +25,5 @@ Description: Displays information for all project meal plans -->
     </profile>
     {% endfor %}
 </main>
-<a href="{% url 'create_meal_plan' %}">
-    <button>Create New Meal Plan</button>
-</a>
+
 {% endblock %} <!-- page specific content ends here -->

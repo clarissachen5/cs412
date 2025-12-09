@@ -9,8 +9,11 @@ Description: Displays information for all project meal ideas -->
 <h1>
     All Meal Ideas
 </h1>
-
+<div class="center-align">
+    <a href="{% url 'create_meal_idea' %}"><button>Add Meal Idea</button></a>
+</div>
 <main class="grid-container">
+    
     {% for meal_idea in meal_ideas %} <!--use a for to display all of the meal ideas-->
     <profile>
         <div class="card">
@@ -42,5 +45,5 @@ Description: Displays information for all project meal ideas -->
     {% endfor %}
 </main>
 
-<a href="{% url 'create_meal_idea' %}">Add Meal Idea</a>
+
 {% endblock %} <!-- page specific content ends here -->

@@ -11,37 +11,53 @@ Description: Creates base template for all pages in project app -->
     </head>
 
     <body>
-        {% if request.user.is_authenticated %} 
-            <form action="{% url 'logout_page' %}" method="POST">
-                {% csrf_token %}
-                <li><input type="submit" value="Logout"></li>
-            </form>
+        <nav class="navbar">
+            <ul>
+                <li><a href="{% url 'show_all_meal_plans'%}">All Meal Plans</a></li>
+                <li><a href="{% url 'show_all_meal_ideas'%}">All Meal Ideas</a></li>
+                <li><a href="{% url 'show_all_ingredients'%}">All Ingredients</a></li>
 
-        {% else %}
-            <li><a href="{% url 'login_page' %}">Login</a></li>
-            <li><a href="{% url 'create_creator' %}">Create Account</a></li>
-        {% endif %}
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'show_creator_meal_ideas' %}">My Meal Ideas</a></li>
+                <li><a href="{% url 'show_creator_meal_plans' %}">My Meal Plans</a></li>
+                {% endif %}
+
+                
+            </ul>
+
             
-        {% if request.user.is_authenticated %}
-        Logged in as: {{request.user}}
-        {% else %}
-        Not logged in
-        {% endif %}        
+                
 
+           
+
+            
+        </nav>
+
+        <div class="signin">
+            {% if request.user.is_authenticated %} 
+                <form action="{% url 'logout_page' %}" method="POST">
+                    {% csrf_token %}
+                    <li><input type="submit" value="Logout"></li>
+                </form>
+
+            {% else %}
+                <li><a href="{% url 'login_page' %}">Login</a></li>
+                <li><a href="{% url 'create_creator' %}">Create Account</a></li>
+            {% endif %}
+                
+            {% if request.user.is_authenticated %}
+                Logged in as: {{request.user}}
+            {% else %}
+                Not logged in
+            {% endif %} 
+      
+        </div>       
+        
         <!-- put page specific content here -->
          {% block content %}
          {% endblock %}
         <!-- end page specific content -->
 
-    <nav>
-            <ul>
-                <li><a href="{% url 'show_all_meal_plans'%}">All Meal Plans</a></li>
-                <li><a href="{% url 'show_all_meal_ideas'%}">All Meal Ideas</a></li>
-                <li><a href="{% url 'show_all_ingredients'%}">All Ingredients</a></li>
-                <li><a href="{% url 'show_creator_meal_ideas' %}">My Meal Ideas</a></li>
-                <li><a href="{% url 'show_creator_meal_plans' %}">My Meal Plans</a></li>
-                 
-            </ul>
-        </nav>
+    
     </body>
 </html>

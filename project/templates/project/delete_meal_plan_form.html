@@ -1,0 +1,26 @@
+<!-- File: project/delete_meal_plan_form.html
+Author: Clarissa Chen (clchen5@bu.edu), 12/8/2025
+Description: Displays information for deleting a meal plan -->
+
+
+
+{% extends 'project/base.html' %} <!-- uses base template -->
+
+{% block content %} <!-- page specific content starts here -->
+<h1>Delete Meal Plan</h1>
+<div class="delete">
+    
+    <!-- form to confirm the delete request -->
+     <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+     </form>
+
+     <!-- form to cancel the delete request -->
+     <form action="{% url 'show_all_meal_plans' %}" method="GET">
+        {% csrf_token %}
+        <input type="submit" value="Cancel">
+    </form>
+</div>
+
+{% endblock %} <!-- page specific content ends here -->

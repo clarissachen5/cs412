@@ -320,3 +320,22 @@ class CreateMealPlanView(LoginRequiredMixin, CreateView):
         response = super().form_valid(form)
 
         return response
+
+
+class DeleteMealPlanView(LoginRequiredMixin, DeleteView):
+    """View class to delete a meal plan and all corresponding MealPlanEntry objects."""
+
+    model = MealPlan
+    template_name = "project/delete_meal_plan_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful delete."""
+
+        return reverse("show_all_meal_plans")
+    
+    

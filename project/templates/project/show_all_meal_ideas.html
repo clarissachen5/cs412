@@ -13,15 +13,16 @@ Description: Displays information for all project meal ideas -->
 <main class="grid-container">
     {% for meal_idea in meal_ideas %} <!--use a for to display all of the meal ideas-->
     <profile>
-        <div>
+        <div class="card">
             <h2>{{meal_idea.name}}</h2>
             <h3>{{meal_idea.ingredients}}</h3>
             
             {% if meal_idea.image %}
                 <img src="{{meal_idea.get_image_url}}" alt="">
             {% endif %}
-            <a href="{{meal_idea.link}}">Link to Recipe</a>
             <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
+            <a href="{{meal_idea.link}}"><button>View Recipe</button></a>
+            
             <a href="{% url 'add_to_meal_plan' meal_idea.pk %}">
                 <button>Add to Meal Plan</button>
             </a>

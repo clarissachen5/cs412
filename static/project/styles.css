@@ -1,0 +1,204 @@
+/* This CSS was derived from NetNinja's multi-column grid example. */
+/* # File: project/styles.css
+# Author: Clarissa Chen (clchen5@bu.edu), 12/9/2025
+# Description: Specifies styling for project app */
+
+body {
+    margin: 30px;
+    background: #a3ebf3;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ul, li {
+    padding: 0px;
+    list-style-type: none;
+}
+
+h1, h2, h3, h4 {
+    color: white;
+    text-align: center;
+}
+
+p {
+    color: white;
+}
+
+header {
+    max-width: 1200px;
+    margin: 40px auto;
+    border-bottom: 1px solid #bbc7c7;
+}
+.grid-container {
+    background: #a3ebf3;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px
+}
+
+.large {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    
+}
+
+.buttons {
+    padding-left: 250px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+
+}
+
+button, input[type="submit"] {
+    background-color: rgb(21, 62, 246);
+    color: white;
+    padding: 10px 20px;
+    margin: 3px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.card {
+    width: 85%;
+    padding: 20px;
+    margin: 20px auto;
+
+    border: 4px solid white;
+    border-radius: 12px;
+
+    background-color: #4d62ff20; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card img {
+    width: 90%;
+    height: auto;
+    border: 4px solid #fff;
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
+}
+
+.entry {
+    max-width: 300px;
+    width: 80%;
+    height: auto;
+    border: 4px solid #fff;
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
+    display: block;
+    margin: 20px auto;
+}
+
+.entry-text {
+    padding: 10px;
+    text-align: center;
+    display: block;
+    margin: 20px auto;
+
+}
+profile p, profile h3, profile h2, profile h1 {
+    margin: 20px 10px;
+    /* text-align: left; */
+
+}
+
+profile_page img, profile_page.featured img {
+    width: 80%;
+    border: 4px solid #fff;
+    border-radius: 8px;
+    padding: 10px;
+    align-items: center;
+}
+
+profile_page p, profile_page h3, profile_page h2, profile_page h1 {
+    margin: 20px 10px;
+    text-align: left;
+    align-items: center;
+    padding-left: 250px;
+    
+
+}
+
+nav li {
+    display: inline;
+    padding-left: 200px;
+    font-size: 20px;
+}
+/* responsive styles: adapt to smaller screen sizes */
+@media screen and (max-width: 980px) {
+
+    profile {
+        grid-column: span 3;
+        display: grid; /* nested grid */
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 760px) {
+
+    profile, profile.featured {
+        
+        display: block; 
+        margin: 0px 20px;
+    }
+}
+
+
+.create {
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+
+
+.update {
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+
+.update div {
+    margin: 30px;
+}
+
+.delete {
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+
+#show_post {
+    color: white;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+#show_post div {
+    padding: 20px;
+
+}
+
+#show_post img {
+   width: 30%;
+
+}
+#show_post a {
+    text-decoration: none; /* remove underlines */
+    margin: 0 5px; /* add spacing if desired */
+
+}

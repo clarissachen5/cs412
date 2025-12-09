@@ -7,30 +7,33 @@ Description: Displays information for one project meal plan -->
 {% block content %} <!-- page specific content starts here -->
 <h1>{{meal_plan.name}}</h1>
     
-    <profile_page>  
+ 
         <main class="grid-container">
             
             {% for meal in meal_entries %}
             <!-- show all meals for the meal plan -->
-                <div>
+                <div class="card">
                     <h2>{{meal.meal_idea.name}}</h2>
                     <h3>{{meal.meal_idea.ingredients}}</h3>
                     <img src="{{meal.meal_idea.get_image_url}}" alt="">
-                    <a href="{{meal.meal_idea.link}}">Link to Recipe</a>
-                    <h3>Created by {{meal.meal_idea.creator.first_name}} {{meal.meal_idea.creator.last_name}}</h3>
-                    <a href="{% url 'delete_meal_plan_entry' meal.pk %}">
+                     <h3>Created by {{meal.meal_idea.creator.first_name}} {{meal.meal_idea.creator.last_name}}</h3>
+                    <a href="{{meal.meal_idea.link}}"><button>View Recipe</button></a>
+                     <a href="{% url 'delete_meal_plan_entry' meal.pk %}">
                         <button>Remove from Meal Plan</button>
                     </a> 
                     
                 </div>
             {% endfor %}
 
-            <li><a href="{% url 'show_grocery_lists' meal_plan.pk %}">Grocery Lists</a></li>
+           
+       
+        </main>
+         <a href="{% url 'show_grocery_lists' meal_plan.pk %}"><button>Grocery Lists</button></a>
             <a href="{% url 'delete_meal_plan' meal_plan.pk %}">
                 <button>Delete Meal Plan</button>
-            </a>  
-        </main>
-    </profile_page>
+            </a> 
+        
+
 
     
 

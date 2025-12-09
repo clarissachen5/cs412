@@ -13,9 +13,9 @@ Description: Displays information for adding a meal idea to a meal plan. -->
     <h3>{{meal_idea.ingredients}}</h3>
     
     {% if meal_idea.image %}
-        <img src="{{meal_idea.get_image_url}}" alt="">
+        <img class="entry" src="{{meal_idea.get_image_url}}" alt="">
     {% endif %}
-    <a href="{{meal_idea.link}}">Link to Recipe</a>
+    <a class="entry-text" href="{{meal_idea.link}}"><button>View Recipe</button></a>
     <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
     
 </div>

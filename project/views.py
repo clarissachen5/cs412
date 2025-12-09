@@ -154,11 +154,16 @@ class GroceryList(DetailView):
 # """add context for grocery ingredients lists by store from the meal plan """
 
 
-class CreateMealPlanEntryView(CreateView):
+class CreateMealPlanEntryView(LoginRequiredMixin, CreateView):
     """A view to handle the creation of a meal entry, aka adding a meal idea to a meal plan."""
 
     form_class = CreateMealPlanEntryForm
     template_name = "project/create_meal_plan_entry_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
 
     def get_context_data(self, **kwargs):
         """Get the meal idea to add to a meal plan."""
@@ -337,6 +342,23 @@ class DeleteMealPlanView(LoginRequiredMixin, DeleteView):
         """Return the URL to redirect after a successful delete."""
 
         return reverse("show_all_meal_plans")
-    
 
 
+class DeleteMealPlanEntryView(LoginRequiredMixin, DeleteView):
+    """View class to delete a MealPlanEntry from a meal plan."""
+
+    model = MealPlanEntry
+    template_name = "project/delete_meal_plan_entry_form.html"
+    context_object_name = "meal_plan_entry"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful delete."""
+        pk = self.kwargs["pk"]
+        meal_plan_entry = MealPlanEntry.objects.get(pk=pk)
+        meal_plan = meal_plan_entry.meal_plan
+        return reverse("show_meal_plan", kwargs={"pk": meal_plan.pk})

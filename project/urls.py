@@ -47,4 +47,9 @@ urlpatterns = [
         DeleteMealPlanView.as_view(),
         name="delete_meal_plan",
     ),
+    path(
+        "meal_plan_entry/<int:pk>/delete",
+        DeleteMealPlanEntryView.as_view(),
+        name="delete_meal_plan_entry",
+    ),
 ]

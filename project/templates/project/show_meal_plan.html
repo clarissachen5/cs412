@@ -18,7 +18,9 @@ Description: Displays information for one project meal plan -->
                     <img src="{{meal.meal_idea.get_image_url}}" alt="">
                     <a href="{{meal.meal_idea.link}}">Link to Recipe</a>
                     <h3>Created by {{meal.meal_idea.creator.first_name}} {{meal.meal_idea.creator.last_name}}</h3>
-
+                    <a href="{% url 'delete_meal_plan_entry' meal.pk %}">
+                        <button>Remove from Meal Plan</button>
+                    </a> 
                     
                 </div>
             {% endfor %}

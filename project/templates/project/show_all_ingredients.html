@@ -10,7 +10,16 @@ Description: Displays information for all project ingredients -->
     All Ingredients
 </h1>
 
-<main class="grid-container">
+<div class="center-align">
+    <a href="{% url 'create_ingredient' %}">
+        <button>Add Ingredient</button>
+    </a>
+    <a href="{% url 'create_store' %}">
+        <button>Add Store</button>
+    </a>
+
+
+
     <table>
         <tr>
             <th>Ingredient: </th>
@@ -30,12 +39,8 @@ Description: Displays information for all project ingredients -->
 
         {% endfor %}
     </table>
+    </div>
     
-    <a href="{% url 'create_ingredient' %}">
-        <button>Add Ingredient</button>
-    </a>
-    <a href="{% url 'create_store' %}">
-        <button>Add Store</button>
-    </a>
-</main>
+    
+
 {% endblock %} <!-- page specific content ends here -->

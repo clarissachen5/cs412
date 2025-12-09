@@ -41,4 +41,5 @@ urlpatterns = [
         CreateMealPlanEntryView.as_view(),
         name="add_to_meal_plan",
     ),
+    path("create_meal_plan", CreateMealPlanView.as_view(), name="create_meal_plan"),
 ]

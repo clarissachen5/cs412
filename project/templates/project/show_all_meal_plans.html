@@ -19,4 +19,7 @@ Description: Displays information for all project meal plans -->
     </profile>
     {% endfor %}
 </main>
+<a href="{% url 'create_meal_plan' %}">
+    <button>Create New Meal Plan</button>
+</a>
 {% endblock %} <!-- page specific content ends here -->

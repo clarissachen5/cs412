@@ -24,7 +24,12 @@ from .models import (
     MealPlanEntry,
 )
 
-from .forms import CreateMealPlanEntryForm, CreateMealIdeaForm, CreateCreatorForm
+from .forms import (
+    CreateMealPlanEntryForm,
+    CreateMealIdeaForm,
+    CreateCreatorForm,
+    CreateMealPlanForm,
+)
 
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -215,6 +220,7 @@ class CreateMealIdeaView(LoginRequiredMixin, CreateView):
         return creator
 
     def get_context_data(self, **kwargs):
+        """Return context with creator set."""
         context = super().get_context_data(**kwargs)
         creator = self.get_object()
         context["creator"] = creator
@@ -277,4 +283,40 @@ class CreateCreatorView(CreateView):
         form.instance.user = user
 
         response = super().form_valid(form)
+        return response
+
+
+class CreateMealPlanView(LoginRequiredMixin, CreateView):
+    """A view to handle the creation of a meal plan.
+    (1) display the HTML form to user (GET)
+    (2) process the form submission and store the new Post object (POST)"""
+
+    form_class = CreateMealPlanForm
+    template_name = "project/create_meal_plan_form.html"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_object(self):
+        """Return the Creator corresponding to the User."""
+        user = self.request.user
+        creator = Creator.objects.get(user=user)
+        return creator
+
+    def get_success_url(self):
+        """Provide a URL to redirect to after creating a new Meal Plan."""
+        return reverse("show_all_meal_plans")
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new object to the Django database."""
+
+        print(form.cleaned_data)
+        creator = self.get_object()
+        form.instance.creator = creator
+        form.save()
+
+        response = super().form_valid(form)
+
         return response

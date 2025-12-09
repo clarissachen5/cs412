@@ -94,7 +94,9 @@ class MealPlan(models.Model):
 class MealPlanEntry(models.Model):
     """Encapsulate the data of a MealPlanEntry for a MealPlan."""
 
-    meal_plan = models.ForeignKey(MealPlan, on_delete=models.CASCADE)
+    meal_plan = models.ForeignKey(
+        MealPlan, on_delete=models.CASCADE, related_name="entries"
+    )  # related name deletes all meal plan entries associated with a meal plan when a meal plan is deleted
     meal_idea = models.ForeignKey(MealIdea, on_delete=models.CASCADE)
 
     def __str__(self):

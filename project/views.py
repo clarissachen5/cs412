@@ -338,4 +338,5 @@ class DeleteMealPlanView(LoginRequiredMixin, DeleteView):
 
         return reverse("show_all_meal_plans")
     
-    
+
+

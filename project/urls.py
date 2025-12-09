@@ -43,6 +43,7 @@ urlpatterns = [
     ),
     path("create_meal_plan", CreateMealPlanView.as_view(), name="create_meal_plan"),
     path("create_ingredient", CreateIngredientView.as_view(), name="create_ingredient"),
+    path("create_store", CreateStoreView.as_view(), name="create_store"),
     path(
         "ingredient/<int:pk>/delete",
         DeleteIngredientView.as_view(),

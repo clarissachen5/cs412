@@ -419,3 +419,32 @@ class DeleteIngredientView(DeleteView):
         """Return the URL to redirect after a successful delete."""
 
         return reverse("show_all_ingredients")
+    
+
+
+
+class CreateStoreView(CreateView):
+    """Define a class for creating a new Store."""
+
+    template_name = "project/create_store_form.html"
+    form_class = CreateStoreForm
+    model = Store
+
+    def get_success_url(self):
+        """Redirects to show ingredients once made successfully."""
+
+        return reverse("show_all_ingredients")
+
+    def form_valid(self, form):
+        """This method handles the form submission and saves the new object to the Django database."""
+
+        print(form.cleaned_data)
+        form.save()
+
+        response = super().form_valid(form)
+
+        return response
+
+
+
+    

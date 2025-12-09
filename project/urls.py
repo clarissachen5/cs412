@@ -33,8 +33,13 @@ urlpatterns = [
     path("create_creator", CreateCreatorView.as_view(), name="create_creator"),
     path(
         "creator_meal_ideas",
-        CreatorDetailView.as_view(),
+        CreatorMealIdeasView.as_view(),
         name="show_creator_meal_ideas",
+    ),
+     path(
+        "creator_meal_plans",
+        CreatorMealPlansView.as_view(),
+        name="show_creator_meal_plans",
     ),
     path(
         "add_to_meal_plan/<int:pk>",

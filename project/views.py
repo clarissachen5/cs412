@@ -56,7 +56,7 @@ class MealIdeaListView(ListView):
         return ""
 
 
-class CreatorDetailView(LoginRequiredMixin, DetailView):
+class CreatorMealIdeasView(LoginRequiredMixin, DetailView):
     """Define a view class to show the meal ideas for one Creator."""
 
     model = Creator
@@ -96,6 +96,34 @@ class MealPlanListView(ListView):
     model = MealPlan
     template_name = "project/show_all_meal_plans.html"
     context_object_name = "meal_plans"
+
+
+class CreatorMealPlansView(LoginRequiredMixin, DetailView):
+    """Define a view class to show the meal plans for one Creator."""
+
+    model = Creator
+    template_name = "project/show_creator_meal_plans.html"
+    context_object_name = "creator"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_object(self):
+        """Return the Creator corresponding to the User."""
+        user = self.request.user
+        creator = Creator.objects.get(user=user)
+        return creator
+
+    def get_context_data(self, **kwargs):
+        """Provides the meal ideas for the Creator"""
+        context = super().get_context_data(**kwargs)
+        creator = self.get_object()
+
+        meal_plans = MealPlan.objects.filter(creator=creator)
+        context["meal_plans"] = meal_plans
+        return context
 
 
 class MealPlanDetailView(DetailView):

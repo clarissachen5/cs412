@@ -44,3 +44,13 @@ class CreateMealPlanForm(forms.ModelForm):
 
         model = MealPlan
         fields = ["name"]
+
+
+class UpdateMealIdeaForm(forms.ModelForm):
+    """A form to handle an update to a Meal Idea."""
+
+    class Meta:
+        """Associate this form with the Meal Idea model in our database"""
+
+        model = MealIdea
+        fields = ["name", "ingredients", "link", "image"]

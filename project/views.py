@@ -29,6 +29,7 @@ from .forms import (
     CreateMealIdeaForm,
     CreateCreatorForm,
     CreateMealPlanForm,
+    UpdateMealIdeaForm,
 )
 
 from django.urls import reverse
@@ -362,3 +363,22 @@ class DeleteMealPlanEntryView(LoginRequiredMixin, DeleteView):
         meal_plan_entry = MealPlanEntry.objects.get(pk=pk)
         meal_plan = meal_plan_entry.meal_plan
         return reverse("show_meal_plan", kwargs={"pk": meal_plan.pk})
+
+
+class UpdateMealIdeaView(LoginRequiredMixin, UpdateView):
+    """View class to handle update of a Meal Idea based on its PK"""
+
+    model = MealIdea
+    form_class = UpdateMealIdeaForm
+    template_name = "project/update_meal_idea_form.html"
+    context_object_name = "meal_idea"
+
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_success_url(self):
+        """Return the URL to redirect after a successful update."""
+
+        return reverse("show_all_meal_ideas")

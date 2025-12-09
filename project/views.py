@@ -56,19 +56,37 @@ class MealIdeaListView(ListView):
         return ""
 
 
-class CreatorDetailView(DetailView):
+class CreatorDetailView(LoginRequiredMixin, DetailView):
     """Define a view class to show the meal ideas for one Creator."""
 
     model = Creator
     template_name = "project/show_creator_meal_ideas.html"
     context_object_name = "creator"
 
+    def get_login_url(self):
+        """Return the URL for this app's login page."""
+
+        return reverse("login_page")
+
+    def get_object(self):
+        """Return the Creator corresponding to the User."""
+        user = self.request.user
+        creator = Creator.objects.get(user=user)
+        return creator
+
+    def get_image_url(self):
+        """sets the image url depending on whether an image file exists or not."""
+        if self.image:
+            return self.image.url
+        return ""
+
     def get_context_data(self, **kwargs):
         """Provides the meal ideas for the Creator"""
         context = super().get_context_data(**kwargs)
+        creator = self.get_object()
 
-        mealIdeas = MealIdea.objects.filter(creator=self.kwargs["pk"])
-        context["mealIdeas"] = mealIdeas
+        mealIdeas = MealIdea.objects.filter(creator=creator)
+        context["meal_ideas"] = mealIdeas
         return context
 
 
@@ -284,7 +302,7 @@ class CreateCreatorView(CreateView):
     def get_absolute_url(self):
         """Redirects to show meal ideas once made successfully."""
 
-        return reverse("creator_meal_ideas", kwargs={"pk", self.pk})
+        return reverse("creator_meal_ideas")
 
     def form_valid(self, form):
         """This method handles the form submission and saves the new Creator object to the Django database."""

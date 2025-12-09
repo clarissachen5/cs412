@@ -32,7 +32,7 @@ urlpatterns = [
     ),
     path("create_creator", CreateCreatorView.as_view(), name="create_creator"),
     path(
-        "creator_meal_ideas/<int:pk>",
+        "creator_meal_ideas",
         CreatorDetailView.as_view(),
         name="show_creator_meal_ideas",
     ),

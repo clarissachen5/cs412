@@ -24,7 +24,7 @@ class Creator(models.Model):
 
     def get_absolute_url(self):
         """Display all meal ideas for creator"""
-        return reverse("show_creator_meal_ideas", kwargs={"pk": self.pk})
+        return reverse("show_all_meal_ideas")
 
 
 class Store(models.Model):

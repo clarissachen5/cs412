@@ -17,12 +17,15 @@ Description: Displays information for all project meal plans -->
 </div>
 <main class="grid-container">
     {% for meal_plan in meal_plans %} <!--use a for to display all of the meal plans-->
-    <profile>
-        <div>
-            <a href="{% url 'show_meal_plan' meal_plan.pk %}"><h2>{{meal_plan.name}}</h2></a>
-            <h3>Created by {{meal_plan.creator.first_name}} {{meal_plan.creator.last_name}}</h3>
-        </div>
-    </profile>
+
+        <a href="{% url 'show_meal_plan' meal_plan.pk %}">
+            <div class="meal_plan_card">
+            
+                <h2>{{meal_plan.name}}</h2>
+                <h3>Created by {{meal_plan.creator.first_name}} {{meal_plan.creator.last_name}}</h3>
+            </div>
+        </a>
+
     {% endfor %}
 </main>
 

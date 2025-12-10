@@ -15,15 +15,14 @@ Description: Displays information for all project meal ideas -->
 <main class="grid-container">
     
     {% for meal_idea in meal_ideas %} <!--use a for to display all of the meal ideas-->
-    <profile>
         <div class="card">
             <h2>{{meal_idea.name}}</h2>
-            <h3>{{meal_idea.ingredients}}</h3>
             
             {% if meal_idea.image %} <!-- checks if there is an image -->
                 <img src="{{meal_idea.get_image_url}}" alt="">
             {% endif %}
             <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
+            <h3>Ingredients: {{meal_idea.ingredients}}</h3>
             <a href="{{meal_idea.link}}"><button>View Recipe</button></a>
             
             <!-- <a href="{% url 'create_meal_ingredient' meal_idea.pk %}">
@@ -41,7 +40,6 @@ Description: Displays information for all project meal ideas -->
             </a>
             {% endif %}
         </div>
-    </profile>
     {% endfor %}
 </main>
 

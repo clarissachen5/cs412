@@ -7,18 +7,23 @@ Description: Displays information for all grocery lists -->
 
 {% block content %} <!-- page specific content starts here -->
 <h1>
-    All Grocery Lists
+   Grocery Lists for {{meal_plan.name}}
 </h1>
 
+<div class="center-align">
+    <a href="{% url 'show_meal_plan' meal_plan.pk %}""><button>Back to Meal Plan</button></a>
+</div>
 <main class="grid-container">
     {% for store, ingredients in storeLists.items %} <!--use a for to display the grocery lists for each store-->
-        <h1>{{store}}</h1>
-    <profile>
-        {% for ingredient, details in ingredients.items %} <!--use a for to display each ingredient in the grocery list-->
-            <h2>{{ingredient}} {{details.1}} {{details.0}} </h2>
-            
-        {% endfor %}
-    </profile>
+        <div class="card">
+            <h1>{{store}}</h1>
+
+            {% for ingredient, details in ingredients.items %} <!--use a for to display each ingredient in the grocery list-->
+                <h2>{{ingredient}} {{details.1}} {{details.0}} </h2>
+                
+            {% endfor %}
+         </div>
+
     {% endfor %}
 </main>
 {% endblock %} <!-- page specific content ends here -->

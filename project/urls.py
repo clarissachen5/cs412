@@ -74,4 +74,5 @@ urlpatterns = [
         CreateMealIngredientView.as_view(),
         name="create_meal_ingredient",
     ),
+    
 ]

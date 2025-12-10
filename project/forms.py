@@ -73,7 +73,7 @@ class CreateMealIngredientForm(forms.ModelForm):
         """Associate this form with the Ingredient model in our database."""
 
         model = MealIngredient
-        fields = ["quantity"]
+        fields = ["quantity", "ingredient"]
 
 
 class CreateStoreForm(forms.ModelForm):

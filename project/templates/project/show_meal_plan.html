@@ -25,7 +25,9 @@ Description: Displays information for one project meal plan -->
         <div class="card">
             <h2>{{meal.meal_idea.name}}</h2>
             <h3>{{meal.meal_idea.ingredients}}</h3>
+            {% if meal_idea.image %}
             <img src="{{meal.meal_idea.get_image_url}}" alt="">
+            {% endif %}
                 <h3>Created by {{meal.meal_idea.creator.first_name}} {{meal.meal_idea.creator.last_name}}</h3>
             <a href="{{meal.meal_idea.link}}"><button>View Recipe</button></a>
                 

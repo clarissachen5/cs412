@@ -474,6 +474,18 @@ class CreateMealIngredientView(CreateView):
     model = MealIngredient
     context_object_name = "meal_idea"
 
+    def get_object(self):
+        """Return the meal idea corresponding to the ingredient."""
+        pk = self.kwargs["pk"]
+        meal_idea = MealIdea.objects.get(pk=pk)
+
+        return meal_idea
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["meal_idea"] = self.get_object()
+        return context
+
     def get_success_url(self):
         """Redirects to show meal ideas once made successfully."""
 
@@ -483,6 +495,8 @@ class CreateMealIngredientView(CreateView):
         """This method handles the form submission and saves the new object to the Django database."""
 
         print(form.cleaned_data)
+        meal_idea = self.get_object()
+        form.instance.meal_idea = meal_idea
         form.save()
 
         response = super().form_valid(form)

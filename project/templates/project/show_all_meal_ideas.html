@@ -22,12 +22,21 @@ Description: Displays information for all project meal ideas -->
                 <img src="{{meal_idea.get_image_url}}" alt="">
             {% endif %}
             <h3>Created by {{meal_idea.creator.first_name}} {{meal_idea.creator.last_name}}</h3>
-            <h3>Ingredients: {{meal_idea.ingredients}}</h3>
+            
+           <h3>Ingredients:</h3>
+            {% for ing in meal_idea.get_all_ingredients %}
+                <h4>{{ing.quantity}} {{ing.ingredient.unit}} of {{ing.ingredient.name}} </h4>
+            {% endfor %}
+            
+            <!-- <h3>Ingredients: {{meal_idea.ingredients}}</h3> -->
             <a href="{{meal_idea.link}}"><button>View Recipe</button></a>
             
             <!-- <a href="{% url 'create_meal_ingredient' meal_idea.pk %}">
                 <button>Add Ingredient</button>
             </a> -->
+            <a href="{% url 'create_meal_ingredient' meal_idea.pk %}">
+                <button>Add Ingredient</button>
+            </a>
             <a href="{% url 'add_to_meal_plan' meal_idea.pk %}">
                 <button>Add to Meal Plan</button>
             </a>

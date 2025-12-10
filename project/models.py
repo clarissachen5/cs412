@@ -41,7 +41,9 @@ class MealIdea(models.Model):
     """Encapsulate the data of a MealIdea by a user"""
 
     name = models.TextField(blank=True)
-    ingredients = models.TextField(blank=True)
+    ingredients = models.TextField(
+        blank=True
+    )  # this is no longer relevant, didn't delete to prevent errors
     link = models.TextField(blank=True)
     image = models.ImageField(blank=True)
     creator = models.ForeignKey(Creator, on_delete=models.CASCADE)
@@ -54,6 +56,12 @@ class MealIdea(models.Model):
     def get_image_url(self):
         """returns url for the image file"""
         return self.image.url
+
+    def get_all_ingredients(self):
+        """Return a QuerySet of MealIngredients for this MealIdea."""
+        meal_ingredients = MealIngredient.objects.filter(meal_idea=self)
+        print(meal_ingredients)
+        return meal_ingredients
 
 
 class Ingredient(models.Model):

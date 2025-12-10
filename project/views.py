@@ -328,9 +328,9 @@ class CreateCreatorView(CreateView):
         return context
 
     def get_absolute_url(self):
-        """Redirects to show meal ideas once made successfully."""
+        """Redirects to show all meal ideas once made successfully."""
 
-        return reverse("creator_meal_ideas")
+        return reverse("show_all_meal_ideas")
 
     def form_valid(self, form):
         """This method handles the form submission and saves the new Creator object to the Django database."""

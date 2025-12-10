@@ -28,6 +28,9 @@ Description: Displays information for project meal ideas for current creator-->
             <h3>Ingredients: {{meal_idea.ingredients}}</h3>
             <a href="{{meal_idea.link}}"><button>View Recipe</button></a>
             
+            <a href="{% url 'create_meal_ingredient' meal_idea.pk %}">
+                <button>Add Ingredient</button>
+            </a>
             <a href="{% url 'add_to_meal_plan' meal_idea.pk %}">
                 <button>Add to Meal Plan</button>
             </a>

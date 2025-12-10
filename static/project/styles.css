@@ -80,9 +80,16 @@ button, input[type="submit"] {
     align-items: center;
 }
 
+.card h4 {
+    margin: 4px 0;  
+    padding: 0;
+    padding-bottom: 20px;
+}
+
+
 .card {
     width: 500px;
-    height: 800px;
+    height: 1000px;
     padding: 20px;
     margin: 20px auto;
 
